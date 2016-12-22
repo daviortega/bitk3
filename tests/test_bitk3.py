@@ -16,7 +16,6 @@ from bitk3 import bitk3
 from bitk3 import cli
 import os
 
-
 def test_command_line_interface():
     runner = CliRunner()
     result = runner.invoke(cli.main)
@@ -58,6 +57,14 @@ def test_fastaReader_dictionary():
         'Org4|locus4|Acce4|A|C|E':'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK'
     }
     return None
+
+def test_fastaReader_fileMissingHeaderMarker():
+    """Test for invalid fasta file - missing '>' marker"""
+    sampleFile = dataPath + 'invalid_fasta.fa'
+    line = 'Org1|locus1|Acce1|B|C|D'
+    with pytest.raises(Exception) as exinfo:
+        SeqInfo = bitk3.fastaReader(sampleFile)
+    assert 'Invalid FASTA file. Header line must begin with a greater than symbol\nLine: ' + line + '\n\n' in str(exinfo.value)
 
 def test_countFeatureInHeaders_counting():
     """Tests if it can count"""
