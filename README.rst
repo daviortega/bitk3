@@ -27,9 +27,17 @@ Set of functions and scripts for bioinformatics
 * Free software: MIT license
 * Documentation: https://bitk3.readthedocs.io.
 
+Bonus - executable files
+------------------------
+
+add ./bin to $PATH for standalone goodies based on bitk3
+
+in bin you will find add2bashrc.sh which if you run it from the bin directory, it will add it automatically
+
 
 Features
 --------
+
 
 * TODO
 
