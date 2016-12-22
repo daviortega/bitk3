@@ -66,6 +66,30 @@ def test_fastaReader_fileMissingHeaderMarker():
         SeqInfo = bitk3.fastaReader(sampleFile)
     assert 'Invalid FASTA file. Header line must begin with a greater than symbol\nLine: ' + line + '\n\n' in str(exinfo.value)
 
+def test_fasta_class():
+    sampleFile = dataPath + 'fasta.with.bitk.tags.fa'
+    myDict = {}
+    for seqObject in bitk3.Fasta(sampleFile).stream():
+         myDict[seqObject['h']] = seqObject['s']
+    assert myDict == {
+        'Org1|locus1|Acce1|B|C|D':'AAAAAAAAAAAAAKKKKKKKKKKKKKKKA',
+        'Org2|locus2|Acce2|B|C|D':'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK',
+        'Org3|locus3|Acce3|A|C|D':'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK',
+        'Org4|locus4|Acce4|A|C|E':'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK'
+    }
+    return None
+
+def test_fasta_class_makeDictionary():
+    sampleFile = dataPath + 'fasta.with.bitk.tags.fa'
+    myDict = bitk3.Fasta(sampleFile).makeDictionary()
+    assert myDict == {
+        'Org1|locus1|Acce1|B|C|D':'AAAAAAAAAAAAAKKKKKKKKKKKKKKKA',
+        'Org2|locus2|Acce2|B|C|D':'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK',
+        'Org3|locus3|Acce3|A|C|D':'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK',
+        'Org4|locus4|Acce4|A|C|E':'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK'
+    }
+    return None
+
 def test_countFeatureInHeaders_counting():
     """Tests if it can count"""
     sampleFile = dataPath + 'fasta.with.bitk.tags.fa'
