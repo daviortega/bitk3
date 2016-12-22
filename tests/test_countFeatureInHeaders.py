@@ -9,11 +9,7 @@ Tests for `countFeatureInHeaders` script.
 
 import pytest
 
-from contextlib import contextmanager
-from click.testing import CliRunner
-
 from bitk3 import countFeatureInHeaders
-from bitk3 import cli
 import os
 
 myPath = os.getcwd()

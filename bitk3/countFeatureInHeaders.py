@@ -1,5 +1,4 @@
 #!/usr/bin/python3.5
-from bitk3 import bitk3
 import sys
 import argparse
 
@@ -17,6 +16,7 @@ def main(sampleFile, pos):
     return countsDict
 
 if __name__ == "__main__":
+    import bitk3
     parser = argparse.ArgumentParser(prog='countFeatureInTag', usage='%(prog)s fasta_file.fa position', description='Count features in headers of fasta formated files')
     parser.add_argument('sampleFile', metavar='fasta_file.fa', type=str, help='Valid fasta formated file')
     parser.add_argument('pos', metavar='position', type=int, help='Integer of the position of the information to be counted. Positions are divided by default using "|" as separator')
@@ -26,3 +26,5 @@ if __name__ == "__main__":
     pos = args.pos
 
     main(sampleFile, pos)
+else:
+    from bitk3 import bitk3
