@@ -43,7 +43,7 @@ def fastaReader(datafile):
     return seqDic, listOrder
 
 def countFeaturesInTags(listOfTags, pos):
-    """ Return all unique info in a particular position of the tag and 
+    """ Return all unique info in a particular position of the tag and
         count in how many tags they appear"""
     result = {}
     for tag in listOfTags:
