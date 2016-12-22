@@ -26,8 +26,7 @@ env:
 - TOXENV=py34
 - TOXENV=py33
 install: 
-  pip install -U tox
-  pip install coveralls
+  pip install -U tox coveralls
 language: python
 python: 3.5
 script: 
