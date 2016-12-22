@@ -42,12 +42,12 @@ def fastaReader(datafile):
         seqDic[name] = seqDic[name].replace('\n', '').replace(' ', '')
     return seqDic, listOrder
 
-def countFeaturesInHeaders(listOfHeaders, pos):
+def countFeaturesInHeaders(listOfHeaders, pos, sep = BITKTAGSEP):
     """ Return all unique info in a particular position of the tag and
         count in how many headers they appear"""
     result = {}
     for tag in listOfHeaders:
-        info = tag.split(BITKTAGSEP)[pos]
+        info = tag.split(sep)[pos]
         if info not in result.keys():
             result[info] = 1
         else:

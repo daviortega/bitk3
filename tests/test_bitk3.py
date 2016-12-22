@@ -76,3 +76,14 @@ def test_countFeatureInHeaders_counting():
         'A': 2
     }
     return None
+
+def test_countFeatureInHeaders_alternativeTagSeparator():
+    """Tests if it can count"""
+    sampleFile = dataPath + 'fasta.with.bitk.alttags.fa'
+    seqInfo = bitk3.fastaReader(sampleFile)
+    countsDict3 = bitk3.countFeaturesInHeaders(seqInfo[0], 3, sep='-')
+    assert countsDict3 == {
+        'B': 2,
+        'A': 2
+    }
+    return None
