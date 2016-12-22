@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 """
@@ -18,20 +17,6 @@ from bitk3 import cli
 import os
 
 
-@pytest.fixture
-def response():
-    """Sample pytest fixture.
-    See more at: http://doc.pytest.org/en/latest/fixture.html
-    """
-    # import requests
-    # return requests.get('https://github.com/audreyr/cookiecutter-pypackage')
-
-
-def test_content(response):
-    """Sample pytest test function with the pytest fixture as an argument.
-    """
-    # from bs4 import BeautifulSoup
-    # assert 'GitHub' in BeautifulSoup(response.content).title.string
 def test_command_line_interface():
     runner = CliRunner()
     result = runner.invoke(cli.main)
@@ -74,11 +59,11 @@ def test_fastaReader_dictionary():
     }
     return None
 
-def test_countFeatureInTags_counting():
+def test_countFeatureInHeaders_counting():
     """Tests if it can count"""
     sampleFile = dataPath + 'fasta.with.bitk.tags.fa'
     seqInfo = bitk3.fastaReader(sampleFile)
-    countsDict3 = bitk3.countFeaturesInTags(seqInfo[0], 3)
+    countsDict3 = bitk3.countFeaturesInHeaders(seqInfo[0], 3)
     assert countsDict3 == {
         'B': 2,
         'A': 2

@@ -17,8 +17,8 @@ class InputError(Exception):
         self.message = message
 
 def fastaReader(datafile):
-    """Reads fasta files into a dictionary where keys are the sequence tags
-    and values are sequences and a list of the tags to preserve order"""
+    """Reads fasta files into a dictionary where keys are the sequence headers
+    and values are sequences and a list of the headers to preserve order"""
     listOrder = []
     seqDic = {}
     fastaBuffer = None
@@ -42,11 +42,11 @@ def fastaReader(datafile):
         seqDic[name] = seqDic[name].replace('\n', '').replace(' ', '')
     return seqDic, listOrder
 
-def countFeaturesInTags(listOfTags, pos):
+def countFeaturesInHeaders(listOfHeaders, pos):
     """ Return all unique info in a particular position of the tag and
-        count in how many tags they appear"""
+        count in how many headers they appear"""
     result = {}
-    for tag in listOfTags:
+    for tag in listOfHeaders:
         info = tag.split(BITKTAGSEP)[pos]
         if info not in result.keys():
             result[info] = 1
