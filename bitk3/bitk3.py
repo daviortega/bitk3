@@ -58,7 +58,7 @@ class Fasta:
 
 def fastaReader(datafile):
     """Reads fasta files into a dictionary where keys are the sequence headers
-    and values are sequences and a list of the headers to preserve order"""
+    and values are sequences and a list of the headers to preserved order"""
     listOrder = []
     seqDic = {}
     fastaBuffer = None
