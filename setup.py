@@ -29,6 +29,9 @@ setup(
     packages=[
         'bitk3',
     ],
+    package_data={
+        'sampledata' : ['*']
+    },
     package_dir={'bitk3':
                  'bitk3'},
     entry_points={
