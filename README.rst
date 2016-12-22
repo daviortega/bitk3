@@ -9,6 +9,9 @@ BIoinformatics ToolKit 3
 .. image:: https://img.shields.io/travis/daviortega/bitk3.svg
         :target: https://travis-ci.org/daviortega/bitk3
 
+.. image:: https://coveralls.io/repos/github/daviortega/bitk3/badge.svg?branch=master
+        :target: https://coveralls.io/github/daviortega/bitk3?branch=master
+
 .. image:: https://readthedocs.org/projects/bitk3/badge/?version=latest
         :target: https://bitk3.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
