@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 """This is the BITK for python 3"""
 
-#List of contants
-BITKTAGSEP = '|' #TAG separator
-BITKGENSEP = '_' #GENome separator
-COGOUTPUTSEP = '\t' #Separator for cog output
+# List of contants
+BITKTAGSEP = '|'  # TAG separator
+BITKGENSEP = '_'  # GENome separator
+COGOUTPUTSEP = '\t'  # Separator for cog output
 MAXSIZEASEQ2SEQ = 100000
+
 
 class InputError(Exception):
     """ Exception raised for errors of the input
@@ -15,6 +16,7 @@ class InputError(Exception):
     def __init__(self, message):
         super(InputError, self).__init__(message)
         self.message = message
+
 
 class Fasta:
     """ Ogun Adebali's approach to stream fasta files"""
@@ -67,7 +69,8 @@ def fastaReader(datafile):
     line = fastaBuffer if fastaBuffer else fileHandle.readline()
     while line:
         if line[0] != '>':
-            raise Exception('Invalid FASTA file. Header line must begin with a greater than symbol\nLine: ' + line + '\n\n')
+            raise Exception('Invalid FASTA file. Header line must begin with \
+a greater than symbol\nLine: ' + line + '\n\n')
         name = line[1:-1]
         listOrder.append(name)
         seqDic[name] = ''
@@ -82,12 +85,27 @@ def fastaReader(datafile):
         seqDic[name] = seqDic[name].replace('\n', '').replace(' ', '')
     return seqDic, listOrder
 
-def countFeaturesInHeaders(listOfHeaders, pos, sep = BITKTAGSEP):
+
+def countFeaturesInHeaders(listOfHeaders, pos, sep=BITKTAGSEP):
     """ Return all unique info in a particular position of the tag and
         count in how many headers they appear"""
     result = {}
     for tag in listOfHeaders:
         info = tag.split(sep)[pos]
+        if info not in result.keys():
+            result[info] = 1
+        else:
+            result[info] += 1
+    return result
+
+
+def countFeaturesInHeaders_streaming(filename, pos, sep=BITKGENSEP):
+    """ Return all unique info in a particular position of the tag and
+        count in how many headers they appear using streaming"""
+
+    result = {}
+    for seqObject in Fasta(filename).stream():
+        info = seqObject['h'].split(sep)[pos]
         if info not in result.keys():
             result[info] = 1
         else:
