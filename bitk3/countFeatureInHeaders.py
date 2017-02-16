@@ -1,6 +1,6 @@
 #!/usr/bin/python3.5
-import sys
 import argparse
+
 
 def main(sampleFile, pos, sep=''):
     """ script to use counterFeaturesInHeaders """

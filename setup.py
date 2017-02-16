@@ -19,13 +19,15 @@ test_requirements = [
     # TODO: put package test requirements here
 ]
 
+
 class PyTest(TestCommand):
     def finalize_options(self):
         TestCommand.finalize_options(self)
         self.test_args = ['-v']
         self.test_suite = True
+
     def run_tests(self):
-        #import here, cause outside the eggs aren't loaded
+        # import here, cause outside the eggs aren't loaded
         import pytest
         pytest.main(self.test_args)
 
@@ -42,7 +44,7 @@ setup(
         'bitk3',
     ],
     package_data={
-        'sampledata' : ['*']
+        'sampledata': ['*']
     },
     package_dir={'bitk3':
                  'bitk3'},
@@ -66,7 +68,7 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
     ],
-    #test_suite='tests',
+    # test_suite='tests',
     tests_require=['pytest'],
-    cmdclass = {'test': PyTest}
+    cmdclass={'test': PyTest}
 )
