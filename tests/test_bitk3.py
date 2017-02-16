@@ -16,6 +16,7 @@ from bitk3 import bitk3
 from bitk3 import cli
 import os
 
+
 def test_command_line_interface():
     runner = CliRunner()
     result = runner.invoke(cli.main)
@@ -27,6 +28,7 @@ def test_command_line_interface():
 
 myPath = os.getcwd()
 dataPath = myPath + '/sampledata/'
+
 
 def test_fastaReader_lists():
     """Simple test for fasta_reader to see if it spits the correct list"""
@@ -46,17 +48,19 @@ def test_fastaReader_lists():
     ]
     return None
 
+
 def test_fastaReader_dictionary():
     """Simple test for fasta_reader to see if spits the correct dictionary"""
     sampleFile = dataPath + 'fasta.with.bitk.tags.fa'
     seqInfo = bitk3.fastaReader(sampleFile)
     assert seqInfo[0] == {
-        'Org1|locus1|Acce1|B|C|D':'AAAAAAAAAAAAAKKKKKKKKKKKKKKKA',
-        'Org2|locus2|Acce2|B|C|D':'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK',
-        'Org3|locus3|Acce3|A|C|D':'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK',
-        'Org4|locus4|Acce4|A|C|E':'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK'
+        'Org1|locus1|Acce1|B|C|D': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKA',
+        'Org2|locus2|Acce2|B|C|D': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK',
+        'Org3|locus3|Acce3|A|C|D': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK',
+        'Org4|locus4|Acce4|A|C|E': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK'
     }
     return None
+
 
 def test_fastaReader_fileMissingHeaderMarker():
     """Test for invalid fasta file - missing '>' marker"""
@@ -64,31 +68,35 @@ def test_fastaReader_fileMissingHeaderMarker():
     line = 'Org1|locus1|Acce1|B|C|D'
     with pytest.raises(Exception) as exinfo:
         SeqInfo = bitk3.fastaReader(sampleFile)
-    assert 'Invalid FASTA file. Header line must begin with a greater than symbol\nLine: ' + line + '\n\n' in str(exinfo.value)
+    assert 'Invalid FASTA file. Header line must begin with a greater than \
+symbol\nLine: ' + line + '\n\n' in str(exinfo.value)
+
 
 def test_fasta_class():
     sampleFile = dataPath + 'fasta.with.bitk.tags.fa'
     myDict = {}
     for seqObject in bitk3.Fasta(sampleFile).stream():
-         myDict[seqObject['h']] = seqObject['s']
+        myDict[seqObject['h']] = seqObject['s']
     assert myDict == {
-        'Org1|locus1|Acce1|B|C|D':'AAAAAAAAAAAAAKKKKKKKKKKKKKKKA',
-        'Org2|locus2|Acce2|B|C|D':'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK',
-        'Org3|locus3|Acce3|A|C|D':'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK',
-        'Org4|locus4|Acce4|A|C|E':'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK'
+        'Org1|locus1|Acce1|B|C|D': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKA',
+        'Org2|locus2|Acce2|B|C|D': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK',
+        'Org3|locus3|Acce3|A|C|D': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK',
+        'Org4|locus4|Acce4|A|C|E': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK'
     }
     return None
+
 
 def test_fasta_class_makeDictionary():
     sampleFile = dataPath + 'fasta.with.bitk.tags.fa'
     myDict = bitk3.Fasta(sampleFile).makeDictionary()
     assert myDict == {
-        'Org1|locus1|Acce1|B|C|D':'AAAAAAAAAAAAAKKKKKKKKKKKKKKKA',
-        'Org2|locus2|Acce2|B|C|D':'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK',
-        'Org3|locus3|Acce3|A|C|D':'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK',
-        'Org4|locus4|Acce4|A|C|E':'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK'
+        'Org1|locus1|Acce1|B|C|D': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKA',
+        'Org2|locus2|Acce2|B|C|D': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK',
+        'Org3|locus3|Acce3|A|C|D': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK',
+        'Org4|locus4|Acce4|A|C|E': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK'
     }
     return None
+
 
 def test_countFeatureInHeaders_counting():
     """Tests if it can count"""
@@ -100,6 +108,7 @@ def test_countFeatureInHeaders_counting():
         'A': 2
     }
     return None
+
 
 def test_countFeatureInHeaders_alternativeTagSeparator():
     """Tests if it can count"""
