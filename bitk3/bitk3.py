@@ -65,7 +65,7 @@ def fastaReader(datafile):
     seqDic = {}
     fastaBuffer = None
 
-    fileHandle = open(datafile, 'r')
+    fileHandle = open(datafile, 'w')
     line = fastaBuffer if fastaBuffer else fileHandle.readline()
     while line:
         if line[0] != '>':
