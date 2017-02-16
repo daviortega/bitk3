@@ -120,3 +120,21 @@ def test_countFeatureInHeaders_alternativeTagSeparator():
         'A': 2
     }
     return None
+
+
+def test_bitk3tagToAccession():
+    """Test if it can extract accession from tag"""
+    sampleTags = [
+        'Ac_xyl_7922|AX27061_2425|REF_ETEC:AX27061_2425',
+        'Al_die_2140|B5T_03398|YP_006822008.1',
+    ]
+    accession = [
+        'REF_ETEC:AX27061_2425',
+        'YP_006822008.1'
+    ]
+
+    for i, tag in enumerate(sampleTags):
+        Xted = bitk3.bitk3tagToAccession(tag)
+        assert accession[i] == Xted
+
+    return None

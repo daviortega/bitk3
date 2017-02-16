@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 """This is the BITK for python 3"""
+import pymongo
+import sys
+
 
 # List of contants
 BITKTAGSEP = '|'  # TAG separator
@@ -111,3 +114,45 @@ def countFeaturesInHeaders_streaming(filename, pos, sep=BITKGENSEP):
         else:
             result[info] += 1
     return result
+
+
+def bitk3tagToAccession(bitk3tag=''):
+    """ Extract accession number from bitk3 tag """
+    return bitk3tag.split(BITKTAGSEP)[2]
+
+
+def get_mist22_client():
+    """ Get mist22 client - soon to be deprecated"""
+    print("Verifying tunnels")
+    print("Mist")
+    try:
+        client = pymongo.MongoClient('localhost',27019)
+        client.mist22.genes.find_one()
+    except TypeError:
+        print("You must open a tunnel with ares.bio.utk.edu: ssh -p 32790 \
+        -f -N -L 27019:localhost:27017 unsername@ares.bio.utk.edu")
+        sys.exit()
+    except pymongo.errors.ConnectionFailure:
+        print("You must open a tunnel with ares.bio.utk.edu: ssh -p 32790 \
+        -f -N -L 27019:localhost:27017 unsername@ares.bio.utk.edu")
+        sys.exit()
+
+    return client
+
+
+def accessionToGeneInfo(accessionList=[]):
+    """ Read a list of accession and returns a generator to run \
+    over all info from the genes"""
+    client = get_mist22_client()
+    mist22 = client.mist22
+    genes = mist22.genes.find(
+        {
+            'p.ac': {
+                '$in': accessionList
+            }
+        }
+    )
+    print('Closing client')
+    client.close
+    return genes
+
