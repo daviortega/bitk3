@@ -1,0 +1,32 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+CliRunner	test_bitk3.py	/^from click.testing import CliRunner$/;"	kind:namespace	line:13
+__init__.py	__init__.py	1;"	kind:file	line:1
+bitk3	test_bitk3.py	/^from bitk3 import bitk3$/;"	kind:namespace	line:15
+cli	test_bitk3.py	/^from bitk3 import cli$/;"	kind:namespace	line:16
+contextmanager	test_bitk3.py	/^from contextlib import contextmanager$/;"	kind:namespace	line:12
+countFeatureInHeaders	test_countFeatureInHeaders.py	/^from bitk3 import countFeatureInHeaders$/;"	kind:namespace	line:12
+dataPath	test_bitk3.py	/^dataPath = myPath + '\/sampledata\/'$/;"	kind:variable	line:30
+dataPath	test_countFeatureInHeaders.py	/^dataPath = myPath + '\/sampledata\/'$/;"	kind:variable	line:16
+myPath	test_bitk3.py	/^myPath = os.getcwd()$/;"	kind:variable	line:29
+myPath	test_countFeatureInHeaders.py	/^myPath = os.getcwd()$/;"	kind:variable	line:15
+os	test_bitk3.py	/^import os$/;"	kind:namespace	line:17
+os	test_countFeatureInHeaders.py	/^import os$/;"	kind:namespace	line:13
+pytest	test_bitk3.py	/^import pytest$/;"	kind:namespace	line:10
+pytest	test_countFeatureInHeaders.py	/^import pytest$/;"	kind:namespace	line:10
+test_bitk3.py	test_bitk3.py	1;"	kind:file	line:1
+test_command_line_interface	test_bitk3.py	/^def test_command_line_interface():$/;"	kind:function	line:20
+test_countFeatureInHeaders	test_countFeatureInHeaders.py	/^def test_countFeatureInHeaders():$/;"	kind:function	line:20
+test_countFeatureInHeaders.py	test_countFeatureInHeaders.py	1;"	kind:file	line:1
+test_countFeatureInHeaders_alternativeTagSeparator	test_bitk3.py	/^def test_countFeatureInHeaders_alternativeTagSeparator():$/;"	kind:function	line:113
+test_countFeatureInHeaders_counting	test_bitk3.py	/^def test_countFeatureInHeaders_counting():$/;"	kind:function	line:101
+test_countFeatureInHeaders_passingAltSeparator	test_countFeatureInHeaders.py	/^def test_countFeatureInHeaders_passingAltSeparator():$/;"	kind:function	line:29
+test_fastaReader_dictionary	test_bitk3.py	/^def test_fastaReader_dictionary():$/;"	kind:function	line:52
+test_fastaReader_fileMissingHeaderMarker	test_bitk3.py	/^def test_fastaReader_fileMissingHeaderMarker():$/;"	kind:function	line:65
+test_fastaReader_lists	test_bitk3.py	/^def test_fastaReader_lists():$/;"	kind:function	line:33
+test_fasta_class	test_bitk3.py	/^def test_fasta_class():$/;"	kind:function	line:75
+test_fasta_class_makeDictionary	test_bitk3.py	/^def test_fasta_class_makeDictionary():$/;"	kind:function	line:89
