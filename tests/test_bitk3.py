@@ -8,6 +8,7 @@ Tests for `bitk3` module.
 """
 
 import pytest
+import json
 
 from contextlib import contextmanager
 from click.testing import CliRunner
@@ -138,3 +139,28 @@ def test_bitk3tagToAccession():
         assert accession[i] == Xted
 
     return None
+
+
+def test_getAseqFromMist22Gene():
+    sampleFile = dataPath + 'mistGenes.json'
+    expected = ['ulF-SXsxtnFn7TYkYb3hnw', None]
+    with open(sampleFile, 'r') as f:
+        genes = json.load(f)
+    results = []
+    for i, gene in enumerate(genes):
+        result = bitk3.getAseqFromMist22Gene(gene)
+        results.append(result)
+    assert expected == results
+
+
+def test_getMistIDFromMist22Gene():
+    sampleFile = dataPath + 'mistGenes.json'
+    expected = [333724, 333725]
+    with open(sampleFile, 'r') as f:
+        genes = json.load(f)
+    results = []
+    for i, gene in enumerate(genes):
+        result = bitk3.getMistIDFromMist22Gene(gene)
+        results.append(result)
+    assert expected == results
+

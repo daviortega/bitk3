@@ -156,3 +156,15 @@ def accessionToGeneInfo(accessionList=[]):
     client.close
     return genes
 
+
+def getAseqFromMist22Gene(gene={}):
+    """ returns the Aseq of a gene information from Mist22 """
+    aseq = None
+    if 'p' in gene.keys():
+        aseq = gene['p']['aid']
+    return aseq
+
+
+def getMistIDFromMist22Gene(gene={}):
+    """ returns the internal ID of a gene information from Mist22 """
+    return gene['_id']
