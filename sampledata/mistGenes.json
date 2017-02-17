@@ -1,0 +1,58 @@
+[
+    {
+        "gs_id": "RheeMzHqPvq0Fzy3uw2XpQ",
+        "pos": 2285,
+        "cid": 180,
+        "a": 2559667,
+        "_id": 333724,
+        "ps": false,
+        "p": {
+            "pd": "transcription-repair coupling factor",
+            "l": 1160,
+            "x": {
+                "gi": 288941951
+            },
+            "aid": "ulF-SXsxtnFn7TYkYb3hnw",
+            "ac": "YP_003444191.1",
+            "f": [
+                [
+                    "inference",
+                    "protein motif:TFAM:TIGR00580"
+                ]
+            ],
+            "n": "KEGG: tgr:Tgr7_1358 transcription-repair coupling factor; TIGRFAM: transcription-repair coupling factor; PFAM: TRCF domain protein; DEAD/DEAH box helicase domain protein; transcription factor CarD; helicase domain protein; SMART: DEAD-like helicase ; helicase domain protein"
+        },
+        "l": 3483,
+        "st": "+",
+        "gc": 0.665231122595464,
+        "gid": 90,
+        "loc": "2559667..2563149",
+        "b": 2563149,
+        "ab": 2563149,
+        "aa": 2559667,
+        "lo": "Alvin_2240"
+    },
+    {
+        "gs_id": "o2BEfVNSoFGTtVhvl1Kkng",
+        "pos": 2286,
+        "cid": 180,
+        "a": 2563448,
+        "f": [
+                [
+                "product",
+                "hypothetical protein"
+                ]
+        ],
+        "_id": 333725,
+        "ps": true,
+        "l": 288,
+        "st": "-",
+        "gc": 0.614583333333333,
+        "gid": 90,
+        "loc": "complement(2563161..2563448)",
+        "b": 2563161,
+        "ab": 2563448,
+        "aa": 2563161,
+        "lo": "Alvin_2241"
+    }
+]
