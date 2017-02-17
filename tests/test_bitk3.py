@@ -164,3 +164,13 @@ def test_getMistIDFromMist22Gene():
         results.append(result)
     assert expected == results
 
+def test_getAccessionFromMist22Gene():
+    sampleFile = dataPath + 'mistGenes.json'
+    expected = ['YP_003444191.1', None]
+    with open(sampleFile, 'r') as f:
+        genes = json.load(f)
+    results = []
+    for i, gene in enumerate(genes):
+        result = bitk3.getAccessionFromMist22Gene(gene)
+        results.append(result)
+    assert expected == results

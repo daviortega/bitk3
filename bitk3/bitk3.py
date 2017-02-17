@@ -168,3 +168,11 @@ def getAseqFromMist22Gene(gene={}):
 def getMistIDFromMist22Gene(gene={}):
     """ returns the internal ID of a gene information from Mist22 """
     return gene['_id']
+
+
+def getAccessionFromMist22Gene(gene={}):
+    """ returns the Accession number of a gene information from Mist22 """
+    ac = None
+    if 'p' in gene.keys():
+        ac = gene['p']['ac']
+    return ac
