@@ -142,6 +142,7 @@ def test_bitk3tagToAccession():
 
 
 def test_getAseqFromMist22Gene():
+    """ Test if it can get Aseq from gene info in MiST22 and pass None if there is no protein info"""
     sampleFile = dataPath + 'mistGenes.json'
     expected = ['ulF-SXsxtnFn7TYkYb3hnw', None]
     with open(sampleFile, 'r') as f:
@@ -154,6 +155,7 @@ def test_getAseqFromMist22Gene():
 
 
 def test_getMistIDFromMist22Gene():
+    """ Test if it can get internal protein gene ID from gene info in MiST22 """
     sampleFile = dataPath + 'mistGenes.json'
     expected = [333724, 333725]
     with open(sampleFile, 'r') as f:
@@ -164,7 +166,10 @@ def test_getMistIDFromMist22Gene():
         results.append(result)
     assert expected == results
 
+
 def test_getAccessionFromMist22Gene():
+    """ Test if it can get Accession from gene info in MiST22 \
+    and pass None if there is no protein info"""
     sampleFile = dataPath + 'mistGenes.json'
     expected = ['YP_003444191.1', None]
     with open(sampleFile, 'r') as f:
@@ -173,4 +178,43 @@ def test_getAccessionFromMist22Gene():
     for i, gene in enumerate(genes):
         result = bitk3.getAccessionFromMist22Gene(gene)
         results.append(result)
+    assert expected == results
+
+
+def test_getLocusFromMist22Gene():
+    """ Test if it can get Locus from gene info in MiST22 """
+    sampleFile = dataPath + 'mistGenes.json'
+    expected = ['Alvin_2240', 'Alvin_2241']
+    with open(sampleFile, 'r') as f:
+        genes = json.load(f)
+    results = []
+    for i, gene in enumerate(genes):
+        result = bitk3.getLocusFromMist22Gene(gene)
+        results.append(result)
+    assert expected == results
+
+
+def test_getGenomeIDFromMist22Gene():
+    """ Test if it can get GenomeID from gene info in MiST22 """
+    sampleFile = dataPath + 'mistGenes.json'
+    expected = [90, 90]
+    with open(sampleFile, 'r') as f:
+        genes = json.load(f)
+    results = []
+    for i, gene in enumerate(genes):
+        result = bitk3.getGenomeIDFromMist22Gene(gene)
+        results.append(result)
+    assert expected == results
+
+
+def test_mist22GeneInfo2bitk3tag():
+    """ Test if it can generate a bitk3 tag from gene info in MiST22 """
+    sampleFile = dataPath + 'mistGenes.json'
+    expected = [
+        'Al_vin_90|Alvin_2240|YP_003444191.1',
+        'Al_vin_90|Alvin_2241|None'
+    ]
+    with open(sampleFile, 'r') as f:
+        genes = json.load(f)
+    results = bitk3.mist22GeneInfo2bitk3tag(genes)
     assert expected == results

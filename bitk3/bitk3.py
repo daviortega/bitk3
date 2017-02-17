@@ -171,8 +171,96 @@ def getMistIDFromMist22Gene(gene={}):
 
 
 def getAccessionFromMist22Gene(gene={}):
-    """ returns the Accession number of a gene information from Mist22 """
+    """ returns the accession number of a gene information from Mist22 """
     ac = None
     if 'p' in gene.keys():
         ac = gene['p']['ac']
     return ac
+
+
+def getLocusFromMist22Gene(gene={}):
+    """ returns the locus number of a gene information from Mist22 """
+    lo = None
+    if 'lo' in gene.keys():
+        lo = gene['lo']
+    return lo
+
+
+def getGenomeIDFromMist22Gene(gene={}):
+    """ returns the internal genome ID of a gene information from Mist22 """
+    mGid = gene['gid']
+    return mGid
+
+
+def getSpeciesNameFromMist22Genome(genome={}):
+    """ returns the species name of a genome information from Mist22 """
+    return genome['sp']
+
+
+def getGenusNameFromMist22Genome(genome={}):
+    """ returns the genus name of a genome information from Mist22 """
+    return genome['g']
+
+
+def getGenomeIDFromMist22Genome(genome={}):
+    """ returns the internal genome ID of a genome information from Mist22 """
+    return genome['_id']
+
+
+def getGenomeInfoFromMistIDs(gids=[]):
+    """
+    Read a list of internal mist22 genome IDs and returns
+    a dictionary with the ID as key and the genome info as value
+
+    Argument Keywords:
+    gids -- List of internal mist22 genome IDs
+
+    Returns:
+    {gids : genomeInfo}
+
+    """
+    client = get_mist22_client()
+    mist22 = client.mist22
+    genomes = mist22.genomes.find(
+        {
+            '_id': {
+                '$in': gids
+            }
+        }
+    )
+
+    genDic = {}
+    for gen in genomes:
+        genDic[gen['_id']] = gen
+    return genDic
+
+
+def mist22GeneInfo2bitk3tag(genes=[]):
+    """ Build bitk3 tag for fasta sequences from list of mist22 genes """
+    gids = []
+
+    for gene in genes:
+        mistGenomeId = getGenomeIDFromMist22Gene(gene)
+        if mistGenomeId not in gids:
+            gids.append(mistGenomeId)
+
+    genDic = getGenomeInfoFromMistIDs(gids)
+
+    bitk3tags = []
+
+    for gene in genes:
+        mistGenomeId = getGenomeIDFromMist22Gene(gene)
+        lo = getLocusFromMist22Gene(gene)
+        accession = getAccessionFromMist22Gene(gene)
+        genus = genDic[mistGenomeId]['g']
+        species = genDic[mistGenomeId]['sp']
+
+        bitk3genID = (str(genus[:2]) + BITKGENSEP + str(species[:3]) +
+                      BITKGENSEP + str(mistGenomeId))
+
+        bitk3tag = (bitk3genID + BITKTAGSEP + str(lo) +
+                    BITKTAGSEP + str(accession))
+
+        bitk3tags.append(bitk3tag)
+
+    return bitk3tags
