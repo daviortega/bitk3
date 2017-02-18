@@ -16,6 +16,7 @@ from bitk3 import buildCheABRmakeFasta
 myPath = os.getcwd()
 dataPath = myPath + '/sampledata/'
 
+
 class TestNotUsingMiST22:
     def test_parseCheInfo(self):
         with open(dataPath + 'mistGenes.more.json', 'r') as f:
