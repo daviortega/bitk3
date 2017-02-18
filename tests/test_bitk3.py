@@ -227,9 +227,10 @@ def test_isValidRefSeqAccession():
 
     return 0
 
-@pytest.mark.skipIf(
+
+@pytest.mark.skipif(
     "TRAVIS" in os.environ and os.environ["TRAVIS"] == "true",
-    "Skipping this test on Travis CI."
+    reason="Skipping this test on Travis CI."
 )
 class TestUsingMist22:
     def test_accession2GeneInfo(self):
