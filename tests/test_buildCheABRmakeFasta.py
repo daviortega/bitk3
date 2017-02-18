@@ -149,7 +149,11 @@ class TestUsingMiST22:
         client = bitk3.get_mist22_client()
         mist22 = client.mist22
 
-        gene = buildCheABRmakeFasta._getNeighbors(mist22, gene, geneNeighborhoodWindow)
+        gene = buildCheABRmakeFasta._getNeighbors(
+            mist22,
+            gene,
+            geneNeighborhoodWindow
+        )
 
         assert gene == expected
         client.close()
@@ -366,4 +370,3 @@ class TestUsingMiST22:
         assert gene == expected
 
         client.close()
-

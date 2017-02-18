@@ -9,24 +9,9 @@ Tests for `bitk3` module.
 
 import pytest
 import json
-import pymongo
-
-from contextlib import contextmanager
-from click.testing import CliRunner
 
 from bitk3 import bitk3
-from bitk3 import cli
 import os
-
-
-def test_command_line_interface():
-    runner = CliRunner()
-    result = runner.invoke(cli.main)
-    assert result.exit_code == 0
-    assert 'bitk3.cli.main' in result.output
-    help_result = runner.invoke(cli.main, ['--help'])
-    assert help_result.exit_code == 0
-    assert '--help  Show this message and exit.' in help_result.output
 
 myPath = os.getcwd()
 dataPath = myPath + '/sampledata/'
@@ -69,7 +54,7 @@ def test_fastaReader_fileMissingHeaderMarker():
     sampleFile = dataPath + 'invalid_fasta.fa'
     line = 'Org1|locus1|Acce1|B|C|D'
     with pytest.raises(Exception) as exinfo:
-        SeqInfo = bitk3.fastaReader(sampleFile)
+        bitk3.fastaReader(sampleFile)
     assert 'Invalid FASTA file. Header line must begin with a greater than \
 symbol\nLine: ' + line + '\n\n' in str(exinfo.value)
 
@@ -143,7 +128,8 @@ def test_bitk3tagToAccession():
 
 
 def test_getAseqFromMist22Gene():
-    """ Test if it can get Aseq from gene info in MiST22 and pass None if there is no protein info """
+    """ Test if it can get Aseq from gene info in MiST22 and pass None if there \
+    is no protein info """
     sampleFile = dataPath + 'mistGenes.json'
     expected = ['ulF-SXsxtnFn7TYkYb3hnw', None]
     with open(sampleFile, 'r') as f:
@@ -157,7 +143,8 @@ def test_getAseqFromMist22Gene():
 
 
 def test_getMistIDFromMist22Gene():
-    """ Test if it can get internal protein gene ID from gene info in MiST22 """
+    """ Test if it can get internal protein gene ID from gene \
+    info in MiST22 """
     sampleFile = dataPath + 'mistGenes.json'
     expected = [333724, 333725]
     with open(sampleFile, 'r') as f:
@@ -212,6 +199,7 @@ def test_getGenomeIDFromMist22Gene():
     assert expected == results
     return 0
 
+
 def test_isValidRefSeqAccession():
     """ Test is input is a valid Accession """
     fixtures = [
@@ -252,7 +240,6 @@ class TestUsingMist22:
             assert ac in listOfRetrievedAC
 
         return 0
-
 
     def test_addBitk3tagTomist22GeneInfo(self):
         """ Test if it can generate a bitk3 tag from gene info in MiST22 """
