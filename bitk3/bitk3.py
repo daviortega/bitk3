@@ -2,6 +2,7 @@
 """This is the BITK for python 3"""
 import pymongo
 import sys
+import re
 
 
 # List of contants
@@ -123,8 +124,6 @@ def bitk3tagToAccession(bitk3tag=''):
 
 def get_mist22_client():
     """ Get mist22 client - soon to be deprecated"""
-    print("Verifying tunnels")
-    print("Mist")
     try:
         client = pymongo.MongoClient('localhost',27019)
         client.mist22.genes.find_one()
@@ -140,21 +139,51 @@ def get_mist22_client():
     return client
 
 
+def isValidRefSeqAccession(accession=''):
+    """ Test if accession is a valid accession """
+    pattern = '((NC|AC|NG|NT|NW|NZ|NM|NR|XM|XR|NP|AP|XP|YP|ZP)_[0-9]+)|(REF.*:[A-Z]{1,}.*_[0-9]+)'
+    if re.match(pattern, str(accession)):
+        match = True
+    else:
+        match = False
+    return match
+
+
+def cleanListOfAccessions(accessionList=[]):
+    newList = []
+    badTypes = []
+    for ac in accessionList:
+        if isValidRefSeqAccession(ac):
+            newList.append(ac)
+        else:
+            badTypes.append(ac)
+
+    return newList, badTypes
+
+
 def accessionToGeneInfo(accessionList=[]):
     """ Read a list of accession and returns a generator to run \
     over all info from the genes"""
+
     client = get_mist22_client()
     mist22 = client.mist22
+
+    newList, badTypes = cleanListOfAccessions(accessionList)
+
     genes = mist22.genes.find(
         {
             'p.ac': {
-                '$in': accessionList
+                '$in': newList
             }
         }
     )
-    print('Closing client')
+
+    geneInfo = []
+    for gene in genes:
+        geneInfo.append(gene)
+
     client.close
-    return genes
+    return geneInfo, badTypes
 
 
 def getAseqFromMist22Gene(gene={}):
@@ -235,7 +264,7 @@ def getGenomeInfoFromMistIDs(gids=[]):
     return genDic
 
 
-def mist22GeneInfo2bitk3tag(genes=[]):
+def addBitk3tagTomist22GeneInfo(genes=[]):
     """ Build bitk3 tag for fasta sequences from list of mist22 genes """
     gids = []
 
@@ -246,7 +275,7 @@ def mist22GeneInfo2bitk3tag(genes=[]):
 
     genDic = getGenomeInfoFromMistIDs(gids)
 
-    bitk3tags = []
+    newGenes = []
 
     for gene in genes:
         mistGenomeId = getGenomeIDFromMist22Gene(gene)
@@ -261,6 +290,7 @@ def mist22GeneInfo2bitk3tag(genes=[]):
         bitk3tag = (bitk3genID + BITKTAGSEP + str(lo) +
                     BITKTAGSEP + str(accession))
 
-        bitk3tags.append(bitk3tag)
+        gene['bitk3tag'] = bitk3tag
+        newGenes.append(gene)
 
-    return bitk3tags
+    return newGenes

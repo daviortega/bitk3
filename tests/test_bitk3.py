@@ -9,6 +9,7 @@ Tests for `bitk3` module.
 
 import pytest
 import json
+import pymongo
 
 from contextlib import contextmanager
 from click.testing import CliRunner
@@ -152,6 +153,7 @@ def test_getAseqFromMist22Gene():
         result = bitk3.getAseqFromMist22Gene(gene)
         results.append(result)
     assert expected == results
+    return 0
 
 
 def test_getMistIDFromMist22Gene():
@@ -165,6 +167,7 @@ def test_getMistIDFromMist22Gene():
         result = bitk3.getMistIDFromMist22Gene(gene)
         results.append(result)
     assert expected == results
+    return 0
 
 
 def test_getAccessionFromMist22Gene():
@@ -179,6 +182,7 @@ def test_getAccessionFromMist22Gene():
         result = bitk3.getAccessionFromMist22Gene(gene)
         results.append(result)
     assert expected == results
+    return 0
 
 
 def test_getLocusFromMist22Gene():
@@ -192,6 +196,7 @@ def test_getLocusFromMist22Gene():
         result = bitk3.getLocusFromMist22Gene(gene)
         results.append(result)
     assert expected == results
+    return 0
 
 
 def test_getGenomeIDFromMist22Gene():
@@ -205,9 +210,10 @@ def test_getGenomeIDFromMist22Gene():
         result = bitk3.getGenomeIDFromMist22Gene(gene)
         results.append(result)
     assert expected == results
+    return 0
 
 
-def test_mist22GeneInfo2bitk3tag():
+def test_addBitk3tagTomist22GeneInfo():
     """ Test if it can generate a bitk3 tag from gene info in MiST22 """
     sampleFile = dataPath + 'mistGenes.json'
     expected = [
@@ -216,5 +222,46 @@ def test_mist22GeneInfo2bitk3tag():
     ]
     with open(sampleFile, 'r') as f:
         genes = json.load(f)
-    results = bitk3.mist22GeneInfo2bitk3tag(genes)
-    assert expected == results
+    genes = bitk3.addBitk3tagTomist22GeneInfo(genes)
+
+    listOfBitk3tag = [gene['bitk3tag'] for gene in genes]
+
+    assert set(expected) == set(listOfBitk3tag)
+    return 0
+
+
+def test_isValidRefSeqAccession():
+    """ Test is input is a valid Accession """
+    fixtures = [
+        [True, 'REF_ETEC:AX27061_2429'],
+        [True, 'YP_001452647.1'],
+        [True, 'YP_574071.1'],
+        [False, None]
+    ]
+
+    for fixture in fixtures:
+        expected, inp = fixture
+        assert expected == bitk3.isValidRefSeqAccession(inp)
+
+    return 0
+
+
+def test_accession2GeneInfo():
+    accessions = [
+        'REF_ETEC:AX27061_2429',
+        'YP_001452647.1',
+        'YP_574071.1',
+        None
+    ]
+
+    genes, badTypes = bitk3.accessionToGeneInfo(accessions)
+    assert isinstance(genes, list)
+    assert isinstance(badTypes, list)
+
+    listOfRetrievedAC = [item['p']['ac'] for item in genes if item]
+    listOfRetrievedAC += badTypes
+
+    for ac in accessions:
+        assert ac in listOfRetrievedAC
+
+    return 0

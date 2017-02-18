@@ -1,11 +1,13 @@
 #!/usr/bin/python3.5
 import argparse
+import SeqDepot
+
 import json
 
 
 def _getSigTransInfoOfNeighbors(mist22Client, gene={}):
     # print(gene['neighborsId'])
-    sigTransInfo = mist22Client.signal_genes5.find(
+    sigTransInfo = mist22Client.signal_genes6.find(
         {
             'cid': gene['cid'],
             '_id': {
@@ -17,6 +19,7 @@ def _getSigTransInfoOfNeighbors(mist22Client, gene={}):
     cheInfo = [{'che': False} for i in range(len(gene['neighborsId']))]
 
     for info in sigTransInfo:
+        # print(json.dumps(info, indent=1))
         if info['r'][0] == 'chemotaxis':
             if info['r'][1] == 'cheb':
                 cheInfo[gene['neighborsId'].index(info['_id'])]['che'] = 'cheb'
@@ -41,16 +44,20 @@ def _getNeighbors(mist22Client, gene={}, geneNeighborhoodWindow=5):
         }
     ).limit(limitSearch)
 
-    ids = []
+    accessions = []
     aseqs = []
+    ids = []
     for neighbor in neighbors:
         # print(json.dumps(neighbor, indent=2))
-        _id = bitk3.getMistIDFromMist22Gene(neighbor)
-        ids.append(_id)
+        accession = bitk3.getAccessionFromMist22Gene(neighbor)
+        accessions.append(accession)
         aseq = bitk3.getAseqFromMist22Gene(neighbor)
         aseqs.append(aseq)
-    gene['neighborsId'] = ids
+        _id = bitk3.getMistIDFromMist22Gene(neighbor)
+        ids.append(_id)
+    gene['neighborsAC'] = accessions
     gene['neighborsAseq'] = aseqs
+    gene['neighborsId'] = ids
 
     return gene
 
@@ -74,43 +81,102 @@ def main(cheaTagFileName='', geneNeighborhoodWindow=5):
     """
 
     cheAseqs = []
-    geneInfo = {}
+    ac2bitk3tag = {}
 
     client = bitk3.get_mist22_client()
     mist22 = client.mist22
 
     with open(cheaTagFileName, 'r') as f:
         for tag in f:
-            accession = bitk3.bitk3tagToAccession(tag.replace('\n', ''))
-            geneInfo[accession] = {'tag': tag}
+            tag = tag.replace('\n', '')
+            accession = bitk3.bitk3tagToAccession(tag)
+            ac2bitk3tag[accession] = tag
 
-    tags = [i for i in geneInfo.keys()]
-    genes = bitk3.accessionToGeneInfo(tags)
+    cheAac = [i for i in ac2bitk3tag.keys()]
+    genes, badAC = bitk3.accessionToGeneInfo(cheAac)
+
+    seqInfo = {
+        'chea': [],
+        'cheb': [],
+        'cher': [],
+    }
+
+    cheBRac = []
 
     for gene in genes:
-        # print(json.dumps(gene, indent=2))
         aseq = bitk3.getAseqFromMist22Gene(gene)
         cheAseqs.append(aseq)
+        cheAac = bitk3.getAccessionFromMist22Gene(gene)
+        seqInfo['chea'].append({
+            'header': cheAac,
+            's': aseq}
+        )
 
-        accession = bitk3.getAccessionFromMist22Gene(gene)
-        geneInfo[accession]['aseqs'] = aseq
-
+        # print('getting info')
         gene = _getNeighbors(mist22, gene, geneNeighborhoodWindow)
         gene = _getSigTransInfoOfNeighbors(mist22, gene)
+#        print(gene['cheInfo'])
 
-        # print(json.dumps(gene, indent=2))
         for i, cheInfo in enumerate(gene['cheInfo']):
             if cheInfo['che']:
                 aseq = bitk3.getAseqFromMist22Gene(gene)
                 cheAseqs.append(aseq)
-                print('{} - {} - {}'
-                      .format(
-                          cheInfo['che'],
-                          gene['neighborsAseq'][i],
-                          gene['neighborsId'][i]
-                      ))
+                accession = gene['neighborsAC'][i]
+                cheBRac.append(accession)
+                if cheInfo['che'] == 'cher':
+                    seqInfo['cher'].append({
+                        'header': accession,
+                        's': aseq
+                    })
+                if cheInfo['che'] == 'cheb':
+                    seqInfo['cheb'].append({
+                        'header': accession,
+                        's': aseq
+                    })
 
-    print('Closing client')
+        if len(seqInfo['chea']) != len(seqInfo['cheb']):
+            seqInfo['cheb'].append({
+                'header': cheAac,
+                's': None
+            })
+        if len(seqInfo['chea']) != len(seqInfo['cher']):
+            seqInfo['cher'].append({
+                'header': cheAac,
+                's': None
+            })
+
+        print('{}-{}-{}'.format(len(seqInfo['chea']), len(seqInfo['cheb']), len(seqInfo['cher'])))
+
+    aseq2seq = {}
+    sd = SeqDepot.new()
+    seqs = sd.find(cheAseqs, {'fields': 's'})
+    if seqs:
+        for seq in seqs:
+            aseq2seq[seq['data']['id']] = seq['data']['s']
+
+    cheBRgenes, badAC = bitk3.accessionToGeneInfo(cheBRac)
+    cheBRgenes = bitk3.addBitk3tagTomist22GeneInfo(cheBRgenes)
+
+    for i, ac in enumerate(cheBRac):
+        ac2bitk3tag[ac] = [g['bitk3tag'] for g in cheBRgenes if g['p']['ac'] == ac][0]
+
+    print(json.dumps(seqInfo, indent=2))
+
+    for che in seqInfo.keys():
+        filename = che + '.fa'
+        fastaString = ''
+        for seq in seqInfo[che]:
+            try:
+                sequence = aseq2seq[seq['s']]
+            except KeyError:
+                sequence = 'None'
+            fastaString += '>{}\n{}\n'.format(
+                ac2bitk3tag[seq['header']],
+                sequence
+            )
+        with open(filename, 'w') as f:
+            f.write(fastaString)
+
     client.close()
 
     return 0
