@@ -1,19 +1,31 @@
 # -*- coding: utf-8 -*-
 
 """
-test_buildCheABR.py
+test_buildCheABRmakeFasta.py
 ----------------------------------
 
-Tests for `test_buildCheABR` script.
+Tests for `test_buildCheABRmakeFasta` script.
 """
 import pytest
+import json
 import os
 
 from bitk3 import bitk3
-from bitk3 import buildCheABR
+from bitk3 import buildCheABRmakeFasta
 
 myPath = os.getcwd()
 dataPath = myPath + '/sampledata/'
+
+class TestNotUsingMiST22:
+    def test_parseCheInfo(self):
+        with open(dataPath + 'mistGenes.more.json', 'r') as f:
+            genes = json.load(f)
+        with open(dataPath + 'seqInfo.sample.json', 'r') as f:
+            expected = json.load(f)
+
+        seqInfo = buildCheABRmakeFasta._parseCheInfo(genes)
+
+        assert seqInfo == expected
 
 
 @pytest.mark.skipif(
@@ -21,10 +33,10 @@ dataPath = myPath + '/sampledata/'
     reason="Skipping this test on Travis CI."
 )
 class TestUsingMiST22:
-    '''def test_buildCheABR(self):
+    '''def test_buildCheABRmakeFasta(self):
         sampleFileStr = dataPath + 'cheaTags.txt'
         window = 5
-        result = buildCheABR.main(sampleFileStr, window)
+        result = buildCheABRmakeFasta.main(sampleFileStr, window)
         assert result == 0'''
 
     def test__getNeighbors(self):
@@ -136,10 +148,10 @@ class TestUsingMiST22:
         client = bitk3.get_mist22_client()
         mist22 = client.mist22
 
-        gene = buildCheABR._getNeighbors(mist22, gene, geneNeighborhoodWindow)
+        gene = buildCheABRmakeFasta._getNeighbors(mist22, gene, geneNeighborhoodWindow)
 
         assert gene == expected
-
+        client.close()
 
     def test__getSigTransInfoOfNeighbors(self):
         gene = {
@@ -347,7 +359,10 @@ class TestUsingMiST22:
         client = bitk3.get_mist22_client()
         mist22 = client.mist22
 
-        gene = buildCheABR._getSigTransInfoOfNeighbors(mist22, gene)
+        gene = buildCheABRmakeFasta._getSigTransInfoOfNeighbors(mist22, gene)
 
         assert gene['cheInfo'] == expected['cheInfo']
         assert gene == expected
+
+        client.close()
+

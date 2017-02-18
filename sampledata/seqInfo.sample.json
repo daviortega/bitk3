@@ -1,0 +1,221 @@
+{
+  "cheABRac": [
+    "REF_ETEC:AX27061_2425",
+    "REF_ETEC:AX27061_2429",
+    "YP_001452640.1",
+    "YP_003444184.1",
+    "YP_003444187.1",
+    "YP_003444189.1",
+    "YP_004468651.1",
+    "YP_004468653.1",
+    "YP_004468656.1",
+    "YP_006626085.1",
+    "YP_006626088.1",
+    "YP_006822003.1",
+    "YP_006822004.1",
+    "YP_006822008.1",
+    "YP_007898455.1",
+    "YP_007898460.1",
+    "YP_008194816.1",
+    "YP_008194819.1",
+    "YP_008194821.1",
+    "YP_008194819.1",
+    "YP_008194821.1",
+    "YP_008194824.1",
+    "YP_008194828.1",
+    "YP_574070.1",
+    "YP_574071.1",
+    "YP_574074.1"
+  ],
+  "aseqs": [
+    "Wq7ru9cHPVTRzpPA_BWLQQ",
+    "QrL1ViAXijFH8U7TOJuREg",
+    "brh5ccPXvjOjFtduW82G2A",
+    "qngZ9EIlxo2DzoT_3fm6qA",
+    "N1oAD-q5ANcamB9AhLEbSA",
+    "cL4H4CZNFLFWb2ulplDlww",
+    "bf7dddqeiwK1bpkcpmGFVw",
+    "jVoTj2kE1jfWUow94uloSg",
+    "0yCeCrTcNbMekOXCSbh7kQ",
+    "yN4kWK02zQofUpzdWLIOXQ",
+    "bauuwUAKR61hAt8QNStBxw",
+    "aGFi34yfgvrI8UdXRRlpEg",
+    "B5xCSVzrALlfNxRz1DZykw",
+    "xtA7WRMlGic54OY4Cltn8Q",
+    "90syrpQ51tBIWjl8fj2Cxw",
+    "do8D-w7B9HuoAp-JxNREIg",
+    "xvsBS61rKS4iPoyJ2UyRUg",
+    "S188S1cmC6Bggkj7GirV2w",
+    "yzC3gXkCa5LPAEOAhrPNHQ",
+    "S188S1cmC6Bggkj7GirV2w",
+    "yzC3gXkCa5LPAEOAhrPNHQ",
+    "TkgzlCZYKfOXA8hOklzAPw",
+    "eqAdS7UHIV0tbw752GoR4w",
+    "JY2_Ub9U2fkDyH9zsrm1nA",
+    "1-WJ_LXQiarAv4sCWOU1LQ",
+    "rv1CpGDmMkCzM2WIbNGfRQ"
+  ],
+  "neighbors": {
+    "chea": [
+      {
+        "headCheA": "REF_ETEC:AX27061_2425",
+        "s": "Wq7ru9cHPVTRzpPA_BWLQQ",
+        "header": "REF_ETEC:AX27061_2425"
+      },
+      {
+        "headCheA": "YP_001452640.1",
+        "s": "brh5ccPXvjOjFtduW82G2A",
+        "header": "YP_001452640.1"
+      },
+      {
+        "headCheA": "YP_003444189.1",
+        "s": "cL4H4CZNFLFWb2ulplDlww",
+        "header": "YP_003444189.1"
+      },
+      {
+        "headCheA": "YP_004468656.1",
+        "s": "0yCeCrTcNbMekOXCSbh7kQ",
+        "header": "YP_004468656.1"
+      },
+      {
+        "headCheA": "YP_006626085.1",
+        "s": "yN4kWK02zQofUpzdWLIOXQ",
+        "header": "YP_006626085.1"
+      },
+      {
+        "headCheA": "YP_006822008.1",
+        "s": "xtA7WRMlGic54OY4Cltn8Q",
+        "header": "YP_006822008.1"
+      },
+      {
+        "headCheA": "YP_007898455.1",
+        "s": "90syrpQ51tBIWjl8fj2Cxw",
+        "header": "YP_007898455.1"
+      },
+      {
+        "headCheA": "YP_008194816.1",
+        "s": "xvsBS61rKS4iPoyJ2UyRUg",
+        "header": "YP_008194816.1"
+      },
+      {
+        "headCheA": "YP_008194824.1",
+        "s": "TkgzlCZYKfOXA8hOklzAPw",
+        "header": "YP_008194824.1|CONFLICT:2_cher"
+      },
+      {
+        "headCheA": "YP_574074.1",
+        "s": "rv1CpGDmMkCzM2WIbNGfRQ",
+        "header": "YP_574074.1"
+      }
+    ],
+    "cheb": [
+      {
+        "headCheA": "REF_ETEC:AX27061_2425",
+        "s": "QrL1ViAXijFH8U7TOJuREg",
+        "header": "REF_ETEC:AX27061_2429"
+      },
+      {
+        "headCheA": "YP_001452640.1",
+        "s": null,
+        "header": null
+      },
+      {
+        "headCheA": "YP_003444189.1",
+        "s": "qngZ9EIlxo2DzoT_3fm6qA",
+        "header": "YP_003444184.1"
+      },
+      {
+        "headCheA": "YP_004468656.1",
+        "s": "bf7dddqeiwK1bpkcpmGFVw",
+        "header": "YP_004468651.1"
+      },
+      {
+        "headCheA": "YP_006626085.1",
+        "s": "bauuwUAKR61hAt8QNStBxw",
+        "header": "YP_006626088.1"
+      },
+      {
+        "headCheA": "YP_006822008.1",
+        "s": "aGFi34yfgvrI8UdXRRlpEg",
+        "header": "YP_006822003.1"
+      },
+      {
+        "headCheA": "YP_007898455.1",
+        "s": null,
+        "header": null
+      },
+      {
+        "headCheA": "YP_008194816.1",
+        "s": "yzC3gXkCa5LPAEOAhrPNHQ",
+        "header": "YP_008194821.1"
+      },
+      {
+        "headCheA": "YP_008194824.1",
+        "s": "yzC3gXkCa5LPAEOAhrPNHQ",
+        "header": "YP_008194821.1|CONFLICT:2_cher"
+      },
+      {
+        "headCheA": "YP_574074.1",
+        "s": "JY2_Ub9U2fkDyH9zsrm1nA",
+        "header": "YP_574070.1"
+      }
+    ],
+    "cher": [
+      {
+        "headCheA": "REF_ETEC:AX27061_2425",
+        "s": null,
+        "header": null
+      },
+      {
+        "headCheA": "YP_001452640.1",
+        "s": null,
+        "header": null
+      },
+      {
+        "headCheA": "YP_003444189.1",
+        "s": "N1oAD-q5ANcamB9AhLEbSA",
+        "header": "YP_003444187.1"
+      },
+      {
+        "headCheA": "YP_004468656.1",
+        "s": "jVoTj2kE1jfWUow94uloSg",
+        "header": "YP_004468653.1"
+      },
+      {
+        "headCheA": "YP_006626085.1",
+        "s": null,
+        "header": null
+      },
+      {
+        "headCheA": "YP_006822008.1",
+        "s": "B5xCSVzrALlfNxRz1DZykw",
+        "header": "YP_006822004.1"
+      },
+      {
+        "headCheA": "YP_007898455.1",
+        "s": "do8D-w7B9HuoAp-JxNREIg",
+        "header": "YP_007898460.1"
+      },
+      {
+        "headCheA": "YP_008194816.1",
+        "s": "S188S1cmC6Bggkj7GirV2w",
+        "header": "YP_008194819.1"
+      },
+      {
+        "headCheA": "YP_008194824.1",
+        "s": "S188S1cmC6Bggkj7GirV2w",
+        "header": "YP_008194819.1|CONFLICT:2_cher"
+      },
+      {
+        "headCheA": "YP_008194824.1",
+        "s": "eqAdS7UHIV0tbw752GoR4w",
+        "header": "YP_008194828.1|CONFLICT:2_cher"
+      },
+      {
+        "headCheA": "YP_574074.1",
+        "s": "1-WJ_LXQiarAv4sCWOU1LQ",
+        "header": "YP_574071.1"
+      }
+    ]
+  }
+}

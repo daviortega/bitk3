@@ -1,8 +1,7 @@
 #!/usr/bin/python3.5
 import argparse
-import SeqDepot
-
 import json
+import sys
 
 
 def _getSigTransInfoOfNeighbors(mist22Client, gene={}):
@@ -65,7 +64,7 @@ def _getNeighbors(mist22Client, gene={}, geneNeighborhoodWindow=5):
     return gene
 
 
-def _parseGeneInfo(genes={}):
+def _parseCheInfo(genes=[]):
 
     seqInfo = {
         'neighbors': {
@@ -74,54 +73,84 @@ def _parseGeneInfo(genes={}):
             'cher': [],
         },
         'aseqs': [],
-
+        'cheABRac': []
     }
 
-    cheBRac = []
-
     for gene in genes:
-        aseq = bitk3.getAseqFromMist22Gene(gene)
-        cheAseqs.append(aseq)
         cheAac = bitk3.getAccessionFromMist22Gene(gene)
-        seqInfo['chea'].append({
-            'header': cheAac,
-            's': aseq}
-        )
-
-        # print('getting info')
-        gene = _getNeighbors(mist22, gene, geneNeighborhoodWindow)
-        gene = _getSigTransInfoOfNeighbors(mist22, gene)
-    #        print(gene['cheInfo'])
+        cheABRcounts = {
+            'chea': 0,
+            'cheb': 0,
+            'cher': 0
+        }
 
         for i, cheInfo in enumerate(gene['cheInfo']):
             if cheInfo['che']:
-                aseq = bitk3.getAseqFromMist22Gene(gene)
-                cheAseqs.append(aseq)
-                accession = gene['neighborsAC'][i]
-                cheBRac.append(accession)
                 if cheInfo['che'] == 'cher':
-                    seqInfo['cher'].append({
+                    accession = gene['neighborsAC'][i]
+                    aseq = gene['neighborsAseq'][i]
+                    seqInfo['neighbors']['cher'].append({
                         'header': accession,
-                        's': aseq
+                        's': aseq,
+                        'headCheA': cheAac
                     })
-                if cheInfo['che'] == 'cheb':
-                    seqInfo['cheb'].append({
+                    cheABRcounts['cher'] += 1
+                    seqInfo['aseqs'].append(aseq)
+                    seqInfo['cheABRac'].append(accession)
+                elif cheInfo['che'] == 'cheb':
+                    accession = gene['neighborsAC'][i]
+                    aseq = gene['neighborsAseq'][i]
+                    seqInfo['neighbors']['cheb'].append({
                         'header': accession,
-                        's': aseq
+                        's': aseq,
+                        'headCheA': cheAac
                     })
+                    cheABRcounts['cheb'] += 1
+                    seqInfo['aseqs'].append(aseq)
+                    seqInfo['cheABRac'].append(accession)
+                elif cheInfo['che'] == 'thisChea':
+                    accession = gene['neighborsAC'][i]
+                    aseq = gene['neighborsAseq'][i]
+                    seqInfo['neighbors']['chea'].append({
+                        'header': accession,
+                        's': aseq,
+                        'headCheA': cheAac
+                    })
+                    cheABRcounts['chea'] += 1
+                    seqInfo['aseqs'].append(aseq)
+                    seqInfo['cheABRac'].append(accession)
+                elif cheInfo['che'] == 'chea':
+                    accession = gene['neighborsAC'][i]
+                    aseq = gene['neighborsAseq'][i]
+                    seqInfo['neighbors']['chea'].append({
+                        'header': accession,
+                        's': aseq,
+                        'headCheA': cheAac
+                    })
+                    cheABRcounts['chea'] += 1
+                    seqInfo['aseqs'].append(aseq)
+                    seqInfo['cheABRac'].append(accession)
 
-        if len(seqInfo['chea']) != len(seqInfo['cheb']):
-            seqInfo['cheb'].append({
-                'header': cheAac,
-                's': None
-            })
-        if len(seqInfo['chea']) != len(seqInfo['cher']):
-            seqInfo['cher'].append({
-                'header': cheAac,
-                's': None
-            })
+        conflict = ''
+        for che in cheABRcounts.keys():
+            if cheABRcounts[che] == 0:
+                seqInfo['neighbors'][che].append({
+                    'header': None,
+                    's': None,
+                    'headCheA': cheAac
+                })
+            if cheABRcounts[che] > 1:
+                conflict += '{}_{}, '.format(cheABRcounts[che], che)
 
-    return SeqInfo
+        if conflict != '':
+            for che in cheABRcounts.keys():
+                # print(che)
+                # print(json.dumps(seqInfo['neighbors'][che],indent=2))
+                for info in seqInfo['neighbors'][che][-cheABRcounts[che]:]:
+                    # print(info)
+                    info['header'] += '{}CONFLICT:{}'.format(bitk3.BITKTAGSEP, conflict[:-2])
+
+    return seqInfo
 
 
 def main(cheaTagFileName='', geneNeighborhoodWindow=5):
@@ -141,9 +170,7 @@ def main(cheaTagFileName='', geneNeighborhoodWindow=5):
     0 is it does not fail
 
     """
-
-    cheAseqs = []
-    ac2bitk3tag = {}
+    cheaAC = {}
 
     client = bitk3.get_mist22_client()
     mist22 = client.mist22
@@ -152,102 +179,59 @@ def main(cheaTagFileName='', geneNeighborhoodWindow=5):
         for tag in f:
             tag = tag.replace('\n', '')
             accession = bitk3.bitk3tagToAccession(tag)
-            ac2bitk3tag[accession] = tag
+            cheaAC[accession] = tag
 
-    cheAac = [i for i in ac2bitk3tag.keys()]
-    genes, badAC = bitk3.accessionToGeneInfo(cheAac)
-
-    seqInfo = {
-        'chea': [],
-        'cheb': [],
-        'cher': [],
-    }
-
-    cheBRac = []
-
+    genes, badAC = bitk3.accessionToGeneInfo(cheaAC)
     for gene in genes:
-        aseq = bitk3.getAseqFromMist22Gene(gene)
-        cheAseqs.append(aseq)
-        cheAac = bitk3.getAccessionFromMist22Gene(gene)
-        seqInfo['chea'].append({
-            'header': cheAac,
-            's': aseq}
-        )
-
-        # print('getting info')
         gene = _getNeighbors(mist22, gene, geneNeighborhoodWindow)
         gene = _getSigTransInfoOfNeighbors(mist22, gene)
-#        print(gene['cheInfo'])
 
-        for i, cheInfo in enumerate(gene['cheInfo']):
-            if cheInfo['che']:
-                aseq = bitk3.getAseqFromMist22Gene(gene)
-                cheAseqs.append(aseq)
-                accession = gene['neighborsAC'][i]
-                cheBRac.append(accession)
-                if cheInfo['che'] == 'cher':
-                    seqInfo['cher'].append({
-                        'header': accession,
-                        's': aseq
-                    })
-                if cheInfo['che'] == 'cheb':
-                    seqInfo['cheb'].append({
-                        'header': accession,
-                        's': aseq
-                    })
+    seqInfo = _parseCheInfo(genes)
+    aseq2seq = bitk3.getSeqFromAseq(seqInfo['aseqs'])
 
-        if len(seqInfo['chea']) != len(seqInfo['cheb']):
-            seqInfo['cheb'].append({
-                'header': cheAac,
-                's': None
-            })
-        if len(seqInfo['chea']) != len(seqInfo['cher']):
-            seqInfo['cher'].append({
-                'header': cheAac,
-                's': None
-            })
-
-        print('{}-{}-{}'.format(len(seqInfo['chea']), len(seqInfo['cheb']), len(seqInfo['cher'])))
-
-    aseq2seq = {}
-    sd = SeqDepot.new()
-    seqs = sd.find(cheAseqs, {'fields': 's'})
-    if seqs:
-        for seq in seqs:
-            aseq2seq[seq['data']['id']] = seq['data']['s']
-
-    cheBRgenes, badAC = bitk3.accessionToGeneInfo(cheBRac)
+    cheBRgenes, badAC = bitk3.accessionToGeneInfo(seqInfo['cheABRac'])
     cheBRgenes = bitk3.addBitk3tagTomist22GeneInfo(cheBRgenes)
 
-    for i, ac in enumerate(cheBRac):
-        ac2bitk3tag[ac] = [g['bitk3tag'] for g in cheBRgenes if g['p']['ac'] == ac][0]
+    ac2bitk3tag = {None: None}
+    for i, ac in enumerate(seqInfo['cheABRac']):
+        ac2bitk3tag[ac] = [
+            g['bitk3tag'] for g in cheBRgenes if g['p']['ac'] == ac
+        ][0]
 
-    print(json.dumps(seqInfo, indent=2))
+    seqInfo['FASTA'] = {}
 
-    for che in seqInfo.keys():
+    for che in seqInfo['neighbors'].keys():
         filename = che + '.fa'
         fastaString = ''
-        for seq in seqInfo[che]:
+        for seq in seqInfo['neighbors'][che]:
             try:
                 sequence = aseq2seq[seq['s']]
             except KeyError:
                 sequence = 'None'
-            fastaString += '>{}\n{}\n'.format(
-                ac2bitk3tag[seq['header']],
-                sequence
-            )
+            if seq['header']:
+                ac = seq['header'].split('|CONFLICT')[0]
+                fastaString += '>{}\n{}\n'.format(
+                    seq['header'].replace(ac, ac2bitk3tag[ac]),
+                    sequence
+                )
+            else:
+                fastaString += '>{}\n{}\n'.format(
+                    ac2bitk3tag[seq['headCheA']] + '|NOTFOUND',
+                    sequence
+                )
+        seqInfo['FASTA'][che] = fastaString
         with open(filename, 'w') as f:
             f.write(fastaString)
 
     client.close()
 
-    return SeqInfo
+    return seqInfo
 
 
 if __name__ == "__main__":
     import bitk3
     parser = argparse.ArgumentParser(
-        prog='buildCheABR',
+        prog='buildCheABRmakeFasta',
         usage='%(prog)s input_file position',
         description='Makes concatenated alignment of CheABR \
         given a list of CheA tags'

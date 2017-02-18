@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """This is the BITK for python 3"""
+import SeqDepot
 import pymongo
 import sys
 import re
@@ -294,3 +295,13 @@ def addBitk3tagTomist22GeneInfo(genes=[]):
         newGenes.append(gene)
 
     return newGenes
+
+
+def getSeqFromAseq(aseqs=[]):
+    aseq2seq = {}
+    sd = SeqDepot.new()
+    seqs = sd.find(aseqs, {'fields': 's'})
+    if seqs:
+        for seq in seqs:
+            aseq2seq[seq['data']['id']] = seq['data']['s']
+    return aseq2seq

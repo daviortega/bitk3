@@ -1,0 +1,1097 @@
+[
+  {
+    "aa": 2669053,
+    "l": 2130,
+    "cid": 681489,
+    "loc": "2669053..2671182",
+    "a": 2669053,
+    "cheInfo": [
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": "thisChea"
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": "cheb"
+      },
+      {
+        "che": false
+      }
+    ],
+    "neighborsAC": [
+      "REF_ETEC:AX27061_2420",
+      "REF_ETEC:AX27061_2421",
+      "REF_ETEC:AX27061_2422",
+      "REF_ETEC:AX27061_2423",
+      "REF_ETEC:AX27061_2424",
+      "REF_ETEC:AX27061_2425",
+      "REF_ETEC:AX27061_2426",
+      "REF_ETEC:AX27061_2427",
+      "REF_ETEC:AX27061_2428",
+      "REF_ETEC:AX27061_2429",
+      "REF_ETEC:AX27061_2430"
+    ],
+    "ps": false,
+    "neighborsId": [
+      27938339,
+      27938340,
+      27938341,
+      27938342,
+      27938343,
+      27938344,
+      27938345,
+      27938346,
+      27938347,
+      27938348,
+      27938349
+    ],
+    "st": "+",
+    "p": {
+      "aid": "Wq7ru9cHPVTRzpPA_BWLQQ",
+      "pd": "Signal transduction histidine kinase CheA",
+      "x": {
+        "gi": 568127542
+      },
+      "l": 709,
+      "ac": "REF_ETEC:AX27061_2425"
+    },
+    "pos": 2460,
+    "gs_id": "J_6JK0TyJ-jr_Yb4a4RTpQ",
+    "gid": 7922,
+    "_id": 27938344,
+    "gc": 0.6713615023474181,
+    "neighborsAseq": [
+      "tBtkZzSW9XyPCUaf-kv6fA",
+      "o7Nwj3m9V_WmjUyn84uNGQ",
+      "NJMLbo3ehqN4i3Yh9i5ieQ",
+      "qSxp6e30ayiHsWQJZpw_0Q",
+      "dvJ_ieGykwLjwfbfY7akQQ",
+      "Wq7ru9cHPVTRzpPA_BWLQQ",
+      "TELdd6StFnT9NLP07cuvHQ",
+      "Eoutqf7njF-79Gi0i8PO4A",
+      "fTds8tYjk_nq5VSaLpMI9g",
+      "QrL1ViAXijFH8U7TOJuREg",
+      "PWx1HpAJ13ecsExNjd5umQ"
+    ],
+    "lo": "AX27061_2425",
+    "b": 2671182,
+    "ab": 2671182
+  },
+  {
+    "aa": 1040389,
+    "l": 2028,
+    "cid": 1079,
+    "loc": "1040389..1042416",
+    "a": 1040389,
+    "cheInfo": [
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": "thisChea"
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      }
+    ],
+    "neighborsAC": [
+      "YP_001452635.1",
+      "YP_001452636.1",
+      "YP_001452637.1",
+      "YP_001452638.1",
+      "YP_001452639.1",
+      "YP_001452640.1",
+      "YP_001452641.1",
+      "YP_001452642.1",
+      "YP_001452643.1",
+      "YP_001452644.1",
+      "YP_001452645.1"
+    ],
+    "ps": false,
+    "ab": 1042416,
+    "p": {
+      "aid": "brh5ccPXvjOjFtduW82G2A",
+      "n": "chemotactic sensory histidine kinase in two-component regulatory system with CheB and CheY; sensory histidine kinase/signal sensing protein; CheA is the histidine kinase component",
+      "f": [
+        [
+          "inference",
+          "protein motif:BlastProDom:IPR008208"
+        ],
+        [
+          "inference",
+          "protein motif:FPrintScan:IPR004358"
+        ],
+        [
+          "inference",
+          "protein motif:Gene3D:IPR003594"
+        ],
+        [
+          "inference",
+          "protein motif:HMMPfam:IPR002545"
+        ],
+        [
+          "inference",
+          "protein motif:HMMPfam:IPR003594"
+        ],
+        [
+          "inference",
+          "protein motif:HMMPfam:IPR004105"
+        ],
+        [
+          "inference",
+          "protein motif:HMMPfam:IPR008207"
+        ],
+        [
+          "inference",
+          "protein motif:HMMSmart:IPR002545"
+        ],
+        [
+          "inference",
+          "protein motif:HMMSmart:IPR003594"
+        ],
+        [
+          "inference",
+          "protein motif:HMMSmart:IPR008207"
+        ],
+        [
+          "inference",
+          "protein motif:ScanRegExp:IPR000629"
+        ],
+        [
+          "inference",
+          "protein motif:superfamily:IPR002545"
+        ],
+        [
+          "inference",
+          "protein motif:superfamily:IPR003594"
+        ],
+        [
+          "inference",
+          "protein motif:superfamily:IPR008207"
+        ],
+        [
+          "inference",
+          "protein motif:superfamily:IPR009082"
+        ]
+      ],
+      "l": 675,
+      "pd": "chemotaxis protein CheA",
+      "x": {
+        "gi": 157145321
+      },
+      "ac": "YP_001452640.1"
+    },
+    "pos": 1058,
+    "gs_id": "N1UcLXyn3KiY8BQWJZa3tQ",
+    "gid": 578,
+    "_id": 1919802,
+    "gc": 0.563609467455621,
+    "st": "+",
+    "neighborsAseq": [
+      "RuGath1_TmSDVgRfbpw2vA",
+      "CGHRW_5LS-S3MBXHRKmwHA",
+      "wi92YmK8GiylAb032_YtQw",
+      "pg1sD7_rwv0KJFy3Tux2TQ",
+      "Z70FJqcrn3psMO4uLdUrSg",
+      "brh5ccPXvjOjFtduW82G2A",
+      "_BuDLx03btdf0KvUVGmmBw",
+      "BYpSYCF_ySars6TI9AXozg",
+      "sG1oJcgFHSKvJB52K_uTtw",
+      "vLvGC0wl8EizZcZ5ereOCw",
+      "oHCvvAoF0kZLJJL1Q4LZgA"
+    ],
+    "lo": "CKO_01061",
+    "neighborsId": [
+      1919797,
+      1919798,
+      1919799,
+      1919800,
+      1919801,
+      1919802,
+      1919803,
+      1919804,
+      1919805,
+      1919806,
+      1919807
+    ],
+    "b": 1042416
+  },
+  {
+    "aa": 2556621,
+    "l": 2394,
+    "cid": 180,
+    "loc": "complement(2556621..2559014)",
+    "a": 2559014,
+    "cheInfo": [
+      {
+        "che": "cheb"
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": "cher"
+      },
+      {
+        "che": false
+      },
+      {
+        "che": "thisChea"
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      }
+    ],
+    "neighborsAC": [
+      "YP_003444184.1",
+      "YP_003444185.1",
+      "YP_003444186.1",
+      "YP_003444187.1",
+      "YP_003444188.1",
+      "YP_003444189.1",
+      "YP_003444190.1",
+      "YP_003444191.1",
+      null,
+      "YP_003444192.1",
+      "YP_003444193.1"
+    ],
+    "ps": false,
+    "ab": 2559014,
+    "p": {
+      "aid": "cL4H4CZNFLFWb2ulplDlww",
+      "n": "PFAM: ATP-binding region ATPase domain protein; CheW domain protein; Hpt domain protein; Signal transducing histidine kinase homodimeric; SMART: CheW domain protein; Hpt domain protein; ATP-binding region ATPase domain protein; KEGG: cvi:CV_3442 chemotaxis protein CheA",
+      "f": [
+        [
+          "inference",
+          "protein motif:PFAM:PF02518"
+        ]
+      ],
+      "l": 797,
+      "pd": "CheA signal transduction histidine kinase",
+      "x": {
+        "gi": 288941949
+      },
+      "ac": "YP_003444189.1"
+    },
+    "pos": 2283,
+    "gs_id": "wnblWOgIMawyuNQSRTZ17Q",
+    "gid": 90,
+    "_id": 333722,
+    "gc": 0.657894736842105,
+    "st": "-",
+    "neighborsAseq": [
+      "qngZ9EIlxo2DzoT_3fm6qA",
+      "XblUvoFu6rpDoNgGPVpgPQ",
+      "qaHo--RTzopoB-2RD9d7VA",
+      "N1oAD-q5ANcamB9AhLEbSA",
+      "tHvbmzS64QUAT-zZZTgntg",
+      "cL4H4CZNFLFWb2ulplDlww",
+      "pR7sjRC2ZB6VJnWoPo0aBQ",
+      "ulF-SXsxtnFn7TYkYb3hnw",
+      null,
+      "mBfW8Pk0AmFxOZd4TpLlTw",
+      "Cbyy7DoYSt3jypL1TtLTLQ"
+    ],
+    "lo": "Alvin_2238",
+    "neighborsId": [
+      333717,
+      333718,
+      333719,
+      333720,
+      333721,
+      333722,
+      333723,
+      333724,
+      333725,
+      333726,
+      333727
+    ],
+    "b": 2556621
+  },
+  {
+    "aa": 3779777,
+    "l": 2109,
+    "cid": 2652,
+    "loc": "complement(3779777..3781885)",
+    "a": 3781885,
+    "cheInfo": [
+      {
+        "che": "cheb"
+      },
+      {
+        "che": false
+      },
+      {
+        "che": "cher"
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": "thisChea"
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      }
+    ],
+    "neighborsAC": [
+      "YP_004468651.1",
+      "YP_004468652.1",
+      "YP_004468653.1",
+      "YP_004468654.1",
+      "YP_004468655.1",
+      "YP_004468656.1",
+      "YP_004468657.1",
+      "YP_004468658.1",
+      "YP_004468659.1",
+      "YP_004468660.1",
+      "YP_004468661.1"
+    ],
+    "ps": false,
+    "ab": 3781885,
+    "p": {
+      "aid": "0yCeCrTcNbMekOXCSbh7kQ",
+      "n": "COG0643 Chemotaxis protein histidine kinase and related kinases",
+      "l": 702,
+      "pd": "putative two-component sensor (CheA)",
+      "x": {
+        "gi": 333894781
+      },
+      "ac": "YP_004468656.1"
+    },
+    "pos": 3363,
+    "gs_id": "pSHlyh-z_YNtQxZwcB_OPA",
+    "gid": 1413,
+    "_id": 4791796,
+    "gc": 0.46135609293504,
+    "st": "-",
+    "neighborsAseq": [
+      "bf7dddqeiwK1bpkcpmGFVw",
+      "WuoNeR2j5zxOZWL27aB9vA",
+      "jVoTj2kE1jfWUow94uloSg",
+      "zng92hHo_h2oWGaG2QtLYg",
+      "J9Xe7ITERk-TGrrtZbk3IQ",
+      "0yCeCrTcNbMekOXCSbh7kQ",
+      "p4Hs_v9pPvo6Hl9yZSyWfA",
+      "zsAU20FEZnoI4EtoUAtz7A",
+      "asWzGUldLTS4hQlR3RWaxw",
+      "T-dM_MSYCC3q-3xSoOBV_Q",
+      "P3qi4vA7KpkaGfa_TSb_FA"
+    ],
+    "lo": "ambt_16745",
+    "neighborsId": [
+      4791791,
+      4791792,
+      4791793,
+      4791794,
+      4791795,
+      4791796,
+      4791797,
+      4791798,
+      4791799,
+      4791800,
+      4791801
+    ],
+    "b": 3779777
+  },
+  {
+    "neighborsAseq": [
+      "02SnciF6q7s9oiCZbUivAg",
+      "YPfKG4ZgGeT8JnVxJenrwA",
+      "yBt7n_h2SjQ6vHWhRZ9qeA",
+      "nd0S1CfPjqbIjwm15R0mgg",
+      null,
+      "yN4kWK02zQofUpzdWLIOXQ",
+      "3Y0AAXnZ41GXy7hQ7GPbIg",
+      "-6hzPMH2QXGuYw4tq9MT8A",
+      null,
+      "bauuwUAKR61hAt8QNStBxw",
+      "-0gZem1Q9K8vk6LLiKlzNg"
+    ],
+    "loc": "1572148..1574205",
+    "a": 1572148,
+    "ps": false,
+    "p": {
+      "aid": "yN4kWK02zQofUpzdWLIOXQ",
+      "f": [
+        [
+          "old_locus_tag",
+          "BP18323_1442"
+        ]
+      ],
+      "ec": "2.7.3.-",
+      "l": 685,
+      "pd": "chemotaxis protein CheA",
+      "x": {
+        "gi": 408415378
+      },
+      "ac": "YP_006626085.1"
+    },
+    "f": [
+      [
+        "old_locus_tag",
+        "BP18323_1442"
+      ]
+    ],
+    "st": "+",
+    "gc": 0.668124392614189,
+    "lo": "BN118_1442",
+    "ab": 1574205,
+    "aa": 1572148,
+    "l": 2058,
+    "cid": 3940,
+    "neighborsAC": [
+      "YP_006626081.1",
+      "YP_006626082.1",
+      "YP_006626083.1",
+      "YP_006626084.1",
+      null,
+      "YP_006626085.1",
+      "YP_006626086.1",
+      "YP_006626087.1",
+      null,
+      "YP_006626088.1",
+      "YP_006626089.1"
+    ],
+    "gs_id": "eBl-ub65IlNDIGYECAX6mA",
+    "pos": 1470,
+    "cheInfo": [
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": "thisChea"
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": "cheb"
+      },
+      {
+        "che": false
+      }
+    ],
+    "gid": 2113,
+    "_id": 6946909,
+    "ns": [
+      "cheA"
+    ],
+    "neighborsId": [
+      6946904,
+      6946905,
+      6946906,
+      6946907,
+      6946908,
+      6946909,
+      6946910,
+      6946911,
+      6946912,
+      6946913,
+      6946914
+    ],
+    "b": 1574205
+  },
+  {
+    "aa": 3793846,
+    "l": 2004,
+    "cid": 3984,
+    "loc": "complement(3793846..3795849)",
+    "a": 3795849,
+    "cheInfo": [
+      {
+        "che": "cheb"
+      },
+      {
+        "che": "cher"
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": "thisChea"
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      }
+    ],
+    "neighborsAC": [
+      "YP_006822003.1",
+      "YP_006822004.1",
+      "YP_006822005.1",
+      "YP_006822006.1",
+      "YP_006822007.1",
+      "YP_006822008.1",
+      "YP_006822009.1",
+      "YP_006822010.1",
+      "YP_006822011.1",
+      "YP_006822012.1",
+      "YP_006822013.1"
+    ],
+    "ps": false,
+    "neighborsId": [
+      7010022,
+      7010023,
+      7010024,
+      7010025,
+      7010026,
+      7010027,
+      7010028,
+      7010029,
+      7010030,
+      7010031,
+      7010032
+    ],
+    "st": "-",
+    "p": {
+      "aid": "xtA7WRMlGic54OY4Cltn8Q",
+      "pd": "chemotaxis sensory histidine protein kinase, CheA",
+      "x": {
+        "gi": 407697220
+      },
+      "l": 667,
+      "ac": "YP_006822008.1"
+    },
+    "pos": 3411,
+    "gs_id": "G0lszt1lDq55p-q5zWRW8g",
+    "gid": 2140,
+    "_id": 7010027,
+    "gc": 0.6187624750499,
+    "neighborsAseq": [
+      "aGFi34yfgvrI8UdXRRlpEg",
+      "B5xCSVzrALlfNxRz1DZykw",
+      "SiQmRybn0uVLA3ffsyXhmg",
+      "JkZgBOUE6mpcmbtfpMFIkA",
+      "V8EC2s2seYubT-Hernaukg",
+      "xtA7WRMlGic54OY4Cltn8Q",
+      "ZoMWc8GOeVI6Zf299xjf5Q",
+      "afDkb-IXgrT1GbQGVM9Pmg",
+      "w_-D5q_Avv3WiA9TqHB0Eg",
+      "m5GK17dwNzrDwEe_5DgprA",
+      "zQ2Y7y9P6a58ceyqxzxvTA"
+    ],
+    "lo": "B5T_03398",
+    "ns": [
+      "cheA"
+    ],
+    "b": 3793846,
+    "ab": 3795849
+  },
+  {
+    "aa": 2426832,
+    "l": 2094,
+    "cid": 4571,
+    "loc": "2426832..2428925",
+    "a": 2426832,
+    "cheInfo": [
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": "thisChea"
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": "cher"
+      }
+    ],
+    "neighborsAC": [
+      "YP_007898450.1",
+      "YP_007898451.1",
+      "YP_007898452.1",
+      "YP_007898453.1",
+      "YP_007898454.1",
+      "YP_007898455.1",
+      "YP_007898456.1",
+      "YP_007898457.1",
+      "YP_007898458.1",
+      "YP_007898459.1",
+      "YP_007898460.1"
+    ],
+    "ps": false,
+    "neighborsId": [
+      7977840,
+      7977841,
+      7977842,
+      7977843,
+      7977844,
+      7977845,
+      7977846,
+      7977847,
+      7977848,
+      7977849,
+      7977850
+    ],
+    "st": "+",
+    "p": {
+      "aid": "90syrpQ51tBIWjl8fj2Cxw",
+      "pd": "Chemotaxis sensory histidine protein kinase; CheA",
+      "x": {
+        "gi": 482897721
+      },
+      "l": 697,
+      "ac": "YP_007898455.1"
+    },
+    "pos": 2432,
+    "gs_id": "LYd51cMBzRzcOkprLjbbdw",
+    "gid": 2457,
+    "_id": 7977845,
+    "gc": 0.678605539637058,
+    "neighborsAseq": [
+      "d0kh7cQQm9xZIMRpLRznbw",
+      "S4Ahu0sE1dgZxeBr94bc3w",
+      "2phNqBZZBJST325CTBCMOQ",
+      "nHSkSleyBPaRIKjM0d-fow",
+      "u1qvRQ4_QptLWLes_Ochlg",
+      "90syrpQ51tBIWjl8fj2Cxw",
+      "zlVA0Vehsb67fuIitlD2Kg",
+      "91BNNsDA6U7VJu3lbEj6Nw",
+      "avxqj0HW6MSeVRP6NQu8Gw",
+      "86HAwY8AkpoTtajw6JZJvg",
+      "do8D-w7B9HuoAp-JxNREIg"
+    ],
+    "lo": "AvCA6_24340",
+    "ns": [
+      "cheA"
+    ],
+    "b": 2428925,
+    "ab": 2428925
+  },
+  {
+    "aa": 470649,
+    "l": 2079,
+    "cid": 681162,
+    "loc": "470649..472727",
+    "a": 470649,
+    "cheInfo": [
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": "thisChea"
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": "cher"
+      },
+      {
+        "che": false
+      },
+      {
+        "che": "cheb"
+      }
+    ],
+    "neighborsAC": [
+      "YP_008194811.1",
+      "YP_008194812.1",
+      "YP_008194813.1",
+      "YP_008194814.1",
+      "YP_008194815.1",
+      "YP_008194816.1",
+      "YP_008194817.1",
+      "YP_008194818.1",
+      "YP_008194819.1",
+      "YP_008194820.1",
+      "YP_008194821.1"
+    ],
+    "ps": false,
+    "neighborsId": [
+      27335409,
+      27335410,
+      27335411,
+      27335412,
+      27335413,
+      27335414,
+      27335415,
+      27335416,
+      27335417,
+      27335418,
+      27335419
+    ],
+    "st": "+",
+    "p": {
+      "aid": "xvsBS61rKS4iPoyJ2UyRUg",
+      "n": "COG0643 Chemotaxis protein histidine kinase and related kinases",
+      "l": 692,
+      "pd": "two-component sensor CheA",
+      "x": {
+        "gi": 522666354
+      },
+      "ac": "YP_008194816.1"
+    },
+    "pos": 392,
+    "gs_id": "3vOMUW7mR4cbSQT5l9sXcQ",
+    "gid": 7736,
+    "_id": 27335414,
+    "gc": 0.47330447330447306,
+    "neighborsAseq": [
+      "vzmEAZGvuOTDdVJmPc6Dgg",
+      "hzj-r0X4tDl5nIoO52Q_HA",
+      "fb_UOEEz1_ysrAdAfUmY4g",
+      "Cqfvp2etuGrLb0G1Rkp-1A",
+      "_oz2TT0SgvHZAK-ExsFhmg",
+      "xvsBS61rKS4iPoyJ2UyRUg",
+      "LTYoUeNhKZO73Bq6yvEXlQ",
+      "CcBNDxSo5RpySokiLvk60w",
+      "S188S1cmC6Bggkj7GirV2w",
+      "_YIBwgLpLZPSGy5CTv26fQ",
+      "yzC3gXkCa5LPAEOAhrPNHQ"
+    ],
+    "lo": "I876_01960",
+    "b": 472727,
+    "ab": 472727
+  },
+  {
+    "aa": 480635,
+    "l": 1971,
+    "cid": 681162,
+    "loc": "480635..482605",
+    "a": 480635,
+    "cheInfo": [
+      {
+        "che": "cher"
+      },
+      {
+        "che": false
+      },
+      {
+        "che": "cheb"
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": "thisChea"
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": "cher"
+      },
+      {
+        "che": false
+      }
+    ],
+    "neighborsAC": [
+      "YP_008194819.1",
+      "YP_008194820.1",
+      "YP_008194821.1",
+      "YP_008194822.1",
+      "YP_008194823.1",
+      "YP_008194824.1",
+      "YP_008194825.1",
+      "YP_008194826.1",
+      "YP_008194827.1",
+      "YP_008194828.1",
+      "YP_008194829.1"
+    ],
+    "ps": false,
+    "neighborsId": [
+      27335417,
+      27335418,
+      27335419,
+      27335420,
+      27335421,
+      27335422,
+      27335423,
+      27335424,
+      27335425,
+      27335426,
+      27335427
+    ],
+    "st": "+",
+    "p": {
+      "aid": "TkgzlCZYKfOXA8hOklzAPw",
+      "n": "COG0643 Chemotaxis protein histidine kinase and related kinases",
+      "l": 656,
+      "pd": "two-component sensor (CheA)",
+      "x": {
+        "gi": 522666362
+      },
+      "ac": "YP_008194824.1"
+    },
+    "pos": 400,
+    "gs_id": "dQImvGtjwPlBZ_xqdvCpaQ",
+    "gid": 7736,
+    "_id": 27335422,
+    "gc": 0.461694571283612,
+    "neighborsAseq": [
+      "S188S1cmC6Bggkj7GirV2w",
+      "_YIBwgLpLZPSGy5CTv26fQ",
+      "yzC3gXkCa5LPAEOAhrPNHQ",
+      "r4eIM49e9trQmOpConxJTA",
+      "_UnIPGGtdZdZF4CWYkR6jg",
+      "TkgzlCZYKfOXA8hOklzAPw",
+      "iiKd64UlQ_m3YW0wzYgaAw",
+      "Fjpl7XQEGioPd4CilFRj8A",
+      "MIN1IKKrcrWKpxBr7duTjA",
+      "eqAdS7UHIV0tbw752GoR4w",
+      "irtqayHbu9ORTfGi7kKRdw"
+    ],
+    "lo": "I876_02000",
+    "b": 482605,
+    "ab": 482605
+  },
+  {
+    "aa": 2287521,
+    "l": 2148,
+    "cid": 2500,
+    "loc": "complement(2287521..2289668)",
+    "a": 2289668,
+    "cheInfo": [
+      {
+        "che": false
+      },
+      {
+        "che": "cheb"
+      },
+      {
+        "che": "cher"
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": "thisChea"
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      },
+      {
+        "che": false
+      }
+    ],
+    "neighborsAC": [
+      "YP_574069.1",
+      "YP_574070.1",
+      "YP_574071.1",
+      "YP_574072.1",
+      "YP_574073.1",
+      "YP_574074.1",
+      "YP_574075.1",
+      "YP_574076.1",
+      "YP_574077.1",
+      "YP_574078.1",
+      "YP_574079.1"
+    ],
+    "ps": false,
+    "ab": 2289668,
+    "p": {
+      "aid": "rv1CpGDmMkCzM2WIbNGfRQ",
+      "pd": "CheA signal transduction histidine kinase",
+      "x": {
+        "gi": 92114146
+      },
+      "l": 715,
+      "ac": "YP_574074.1"
+    },
+    "pos": 2086,
+    "gs_id": "cizGEO-qCS_oVcNYsWVPPQ",
+    "gid": 1330,
+    "_id": 4500830,
+    "gc": 0.629888268156425,
+    "st": "-",
+    "neighborsAseq": [
+      "y08wbOiOvEnIDJrs_H7KnA",
+      "JY2_Ub9U2fkDyH9zsrm1nA",
+      "1-WJ_LXQiarAv4sCWOU1LQ",
+      "4zuJBAMYFilk2mY-orV7Cw",
+      "NE6Z9SQECkyWXNLh-0rv-A",
+      "rv1CpGDmMkCzM2WIbNGfRQ",
+      "hOygEw-zqIQvAn7m0L7SzA",
+      "kjRq2gZl9J2AoFrtP5rEDA",
+      "rxEIYWyGzBogcFkur_najg",
+      "pN-k18UkB9LAVghTL-wI6w",
+      "w53RDZ63S2AhMdNbUFmccg"
+    ],
+    "lo": "Csal_2024",
+    "neighborsId": [
+      4500825,
+      4500826,
+      4500827,
+      4500828,
+      4500829,
+      4500830,
+      4500831,
+      4500832,
+      4500833,
+      4500834,
+      4500835
+    ],
+    "b": 2287521
+  }
+]
