@@ -319,7 +319,7 @@ class TestUsingMiST22:
                     'che': False
                 },
                 {
-                    'che': False
+                    'che': 'thisChea'
                 },
                 {
                     'che': False
@@ -328,7 +328,7 @@ class TestUsingMiST22:
                     'che': False
                 },
                 {
-                    'che': 'cher'
+                    'che': False
                 },
                 {
                     'che': 'cheb'
@@ -349,4 +349,5 @@ class TestUsingMiST22:
 
         gene = buildCheABR._getSigTransInfoOfNeighbors(mist22, gene)
 
-        assert gene == gene
+        assert gene['cheInfo'] == expected['cheInfo']
+        assert gene == expected

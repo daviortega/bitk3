@@ -16,15 +16,18 @@ def _getSigTransInfoOfNeighbors(mist22Client, gene={}):
         }
     )
 
-    cheInfo = [{'che': False} for i in range(len(gene['neighborsId']))]
+    cheInfo = [{'che': False} for _id in gene['neighborsId']]
 
     for info in sigTransInfo:
-        # print(json.dumps(info, indent=1))
         if info['r'][0] == 'chemotaxis':
             if info['r'][1] == 'cheb':
                 cheInfo[gene['neighborsId'].index(info['_id'])]['che'] = 'cheb'
             elif info['r'][1] == 'cher':
                 cheInfo[gene['neighborsId'].index(info['_id'])]['che'] = 'cher'
+            elif info['_id'] == gene['_id']:
+                cheInfo[gene['neighborsId'].index(info['_id'])]['che'] = 'thisChea'
+            elif info['r'][1] == 'chea':
+                cheInfo[gene['neighborsId'].index(info['_id'])]['che'] = 'chea'
 
     gene['cheInfo'] = cheInfo
 
@@ -60,6 +63,65 @@ def _getNeighbors(mist22Client, gene={}, geneNeighborhoodWindow=5):
     gene['neighborsId'] = ids
 
     return gene
+
+
+def _parseGeneInfo(genes={}):
+
+    seqInfo = {
+        'neighbors': {
+            'chea': [],
+            'cheb': [],
+            'cher': [],
+        },
+        'aseqs': [],
+
+    }
+
+    cheBRac = []
+
+    for gene in genes:
+        aseq = bitk3.getAseqFromMist22Gene(gene)
+        cheAseqs.append(aseq)
+        cheAac = bitk3.getAccessionFromMist22Gene(gene)
+        seqInfo['chea'].append({
+            'header': cheAac,
+            's': aseq}
+        )
+
+        # print('getting info')
+        gene = _getNeighbors(mist22, gene, geneNeighborhoodWindow)
+        gene = _getSigTransInfoOfNeighbors(mist22, gene)
+    #        print(gene['cheInfo'])
+
+        for i, cheInfo in enumerate(gene['cheInfo']):
+            if cheInfo['che']:
+                aseq = bitk3.getAseqFromMist22Gene(gene)
+                cheAseqs.append(aseq)
+                accession = gene['neighborsAC'][i]
+                cheBRac.append(accession)
+                if cheInfo['che'] == 'cher':
+                    seqInfo['cher'].append({
+                        'header': accession,
+                        's': aseq
+                    })
+                if cheInfo['che'] == 'cheb':
+                    seqInfo['cheb'].append({
+                        'header': accession,
+                        's': aseq
+                    })
+
+        if len(seqInfo['chea']) != len(seqInfo['cheb']):
+            seqInfo['cheb'].append({
+                'header': cheAac,
+                's': None
+            })
+        if len(seqInfo['chea']) != len(seqInfo['cher']):
+            seqInfo['cher'].append({
+                'header': cheAac,
+                's': None
+            })
+
+    return SeqInfo
 
 
 def main(cheaTagFileName='', geneNeighborhoodWindow=5):
@@ -179,7 +241,7 @@ def main(cheaTagFileName='', geneNeighborhoodWindow=5):
 
     client.close()
 
-    return 0
+    return SeqInfo
 
 
 if __name__ == "__main__":
