@@ -16,9 +16,9 @@ myPath = os.getcwd()
 dataPath = myPath + '/sampledata/'
 
 
-@pytest.mark.skipIf(
+@pytest.mark.skipif(
     "TRAVIS" in os.environ and os.environ["TRAVIS"] == "true",
-    "Skipping this test on Travis CI."
+    reason="Skipping this test on Travis CI."
 )
 class TestUsingMiST22:
     '''def test_buildCheABR(self):
