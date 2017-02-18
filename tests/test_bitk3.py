@@ -143,7 +143,7 @@ def test_bitk3tagToAccession():
 
 
 def test_getAseqFromMist22Gene():
-    """ Test if it can get Aseq from gene info in MiST22 and pass None if there is no protein info"""
+    """ Test if it can get Aseq from gene info in MiST22 and pass None if there is no protein info """
     sampleFile = dataPath + 'mistGenes.json'
     expected = ['ulF-SXsxtnFn7TYkYb3hnw', None]
     with open(sampleFile, 'r') as f:
@@ -212,24 +212,6 @@ def test_getGenomeIDFromMist22Gene():
     assert expected == results
     return 0
 
-
-def test_addBitk3tagTomist22GeneInfo():
-    """ Test if it can generate a bitk3 tag from gene info in MiST22 """
-    sampleFile = dataPath + 'mistGenes.json'
-    expected = [
-        'Al_vin_90|Alvin_2240|YP_003444191.1',
-        'Al_vin_90|Alvin_2241|None'
-    ]
-    with open(sampleFile, 'r') as f:
-        genes = json.load(f)
-    genes = bitk3.addBitk3tagTomist22GeneInfo(genes)
-
-    listOfBitk3tag = [gene['bitk3tag'] for gene in genes]
-
-    assert set(expected) == set(listOfBitk3tag)
-    return 0
-
-
 def test_isValidRefSeqAccession():
     """ Test is input is a valid Accession """
     fixtures = [
@@ -245,23 +227,44 @@ def test_isValidRefSeqAccession():
 
     return 0
 
+@pytest.mark.skipIf(
+    "TRAVIS" in os.environ and os.environ["TRAVIS"] == "true",
+    "Skipping this test on Travis CI."
+)
+class TestUsingMist22:
+    def test_accession2GeneInfo(self):
+        accessions = [
+            'REF_ETEC:AX27061_2429',
+            'YP_001452647.1',
+            'YP_574071.1',
+            None
+        ]
 
-def test_accession2GeneInfo():
-    accessions = [
-        'REF_ETEC:AX27061_2429',
-        'YP_001452647.1',
-        'YP_574071.1',
-        None
-    ]
+        genes, badTypes = bitk3.accessionToGeneInfo(accessions)
+        assert isinstance(genes, list)
+        assert isinstance(badTypes, list)
 
-    genes, badTypes = bitk3.accessionToGeneInfo(accessions)
-    assert isinstance(genes, list)
-    assert isinstance(badTypes, list)
+        listOfRetrievedAC = [item['p']['ac'] for item in genes if item]
+        listOfRetrievedAC += badTypes
 
-    listOfRetrievedAC = [item['p']['ac'] for item in genes if item]
-    listOfRetrievedAC += badTypes
+        for ac in accessions:
+            assert ac in listOfRetrievedAC
 
-    for ac in accessions:
-        assert ac in listOfRetrievedAC
+        return 0
 
-    return 0
+
+    def test_addBitk3tagTomist22GeneInfo(self):
+        """ Test if it can generate a bitk3 tag from gene info in MiST22 """
+        sampleFile = dataPath + 'mistGenes.json'
+        expected = [
+            'Al_vin_90|Alvin_2240|YP_003444191.1',
+            'Al_vin_90|Alvin_2241|None'
+        ]
+        with open(sampleFile, 'r') as f:
+            genes = json.load(f)
+        genes = bitk3.addBitk3tagTomist22GeneInfo(genes)
+
+        listOfBitk3tag = [gene['bitk3tag'] for gene in genes]
+
+        assert set(expected) == set(listOfBitk3tag)
+        return 0
