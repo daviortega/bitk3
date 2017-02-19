@@ -110,6 +110,7 @@ a greater than symbol\nLine: ' + line + '\n\n')
         seqDic[name] = ''
         line = fileHandle.readline()
         while line:
+            line = line.replace(' ','')
             if line[0] != '>':
                 seqDic[name] += line
                 line = fileHandle.readline()

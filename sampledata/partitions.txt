@@ -1,0 +1,2 @@
+AUTO, part1 = 1-29
+AUTO, part2 = 30-58
