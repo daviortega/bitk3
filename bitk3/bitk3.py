@@ -76,7 +76,7 @@ def isMSA(seqDic={}):
             print('Not an MSA - offending sequence:{}'.format(header))
             break
         first = False
-    
+
     return ismsa
 
 

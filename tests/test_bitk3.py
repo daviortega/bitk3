@@ -258,7 +258,20 @@ TRSARHTTELKKIPQKIPTLARVTPKPKAMTPKLNKADQDEWEEF'
     return 0
 
 
-def test_isMSA():
+def test_isMSA_False():
+    seqInfo = {
+        'Org1|locus1|Acce1|B|C|D': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKA',
+        'Org2|locus2|Acce2|B|C|D': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKKA',
+        'Org3|locus3|Acce3|A|C|D': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK',
+        'Org4|locus4|Acce4|A|C|E': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK'
+    }
+
+    assert not bitk3.isMSA(seqInfo)
+
+    return 0
+
+
+def test_isMSA_True():
     seqInfo = {
         'Org1|locus1|Acce1|B|C|D': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKA',
         'Org2|locus2|Acce2|B|C|D': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK',
