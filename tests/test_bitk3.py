@@ -267,7 +267,6 @@ def test_isMSA_False():
     }
 
     assert not bitk3.isMSA(seqInfo)
-
     return 0
 
 
@@ -280,8 +279,8 @@ def test_isMSA_True():
     }
 
     assert bitk3.isMSA(seqInfo)
-
     return 0
+
 
 @pytest.mark.skipif(
     "TRAVIS" in os.environ and os.environ["TRAVIS"] == "true",

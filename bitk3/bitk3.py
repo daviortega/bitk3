@@ -62,6 +62,7 @@ class Fasta:
             myDict[seqObject['h']] = seqObject['s']
         return myDict
 
+
 def isMSA(seqDic={}):
     """ test if it is a multiple sequence alignment \
     by checking the sequences for being the same length
@@ -92,8 +93,9 @@ def fastaReader(datafile):
 
 
 def fastaReaderByHandle(fileHandle):
-    """Takes a fasta file handle into a dictionary where keys are the sequence headers
-    and values are sequences and a list of the headers to preserved order"""
+    """Takes a fasta file handle into a dictionary where keys are the
+    sequence headers and values are sequences and a list of the headers
+    to preserved order"""
     listOrder = []
     seqDic = {}
     fastaBuffer = None
@@ -153,7 +155,7 @@ def bitk3tagToAccession(bitk3tag=''):
 def get_mist22_client():
     """ Get mist22 client - soon to be deprecated"""
     try:
-        client = pymongo.MongoClient('localhost',27019)
+        client = pymongo.MongoClient('localhost', 27019)
         client.mist22.genes.find_one()
     except TypeError:
         print("You must open a tunnel with ares.bio.utk.edu: ssh -p 32790 \
