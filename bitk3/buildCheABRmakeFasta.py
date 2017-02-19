@@ -1,7 +1,5 @@
 #!/usr/bin/python3.5
 import argparse
-import json
-import sys
 
 
 def _getSigTransInfoOfNeighbors(mist22Client, gene={}):
@@ -24,7 +22,9 @@ def _getSigTransInfoOfNeighbors(mist22Client, gene={}):
             elif info['r'][1] == 'cher':
                 cheInfo[gene['neighborsId'].index(info['_id'])]['che'] = 'cher'
             elif info['_id'] == gene['_id']:
-                cheInfo[gene['neighborsId'].index(info['_id'])]['che'] = 'thisChea'
+                cheInfo[gene['neighborsId'].index(
+                    info['_id']
+                )]['che'] = 'thisChea'
             elif info['r'][1] == 'chea':
                 cheInfo[gene['neighborsId'].index(info['_id'])]['che'] = 'chea'
 
@@ -172,7 +172,10 @@ def _addFastaInfo(seqInfo={}, aseq2seq={}, ac2header={}):
             if seq['header']:
                 ac = seq['header'].split('|CONFLICT')[0]
                 fastaString += '>{}\n{}\n'.format(
-                    seq['header'].replace(ac, ac2header[ac]) + '::' + seq['headCheA'],
+                    seq['header'].replace(
+                        ac,
+                        ac2header[ac]
+                    ) + '::' + seq['headCheA'],
                     sequence
                 )
             else:
@@ -232,7 +235,7 @@ def main(cheaTagFileName='', geneNeighborhoodWindow=5):
 
     seqInfo = _addFastaInfo(seqInfo, aseq2seq, ac2bitk3tag)
 
-    for che in seqInfo['neighbors'].keys():    
+    for che in seqInfo['neighbors'].keys():
         filename = che + '.fa'
         with open(filename, 'w') as f:
             f.write(seqInfo['FASTA'][che])
