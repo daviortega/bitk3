@@ -62,15 +62,42 @@ class Fasta:
             myDict[seqObject['h']] = seqObject['s']
         return myDict
 
+def isMSA(seqDic={}):
+    """ test if it is a multiple sequence alignment \
+    by checking the sequences for being the same length
+    """
+    ismsa = True
+    first = True
+    for header in seqDic.keys():
+        if first:
+            aligLen = len(seqDic[header])
+        elif aligLen != len(seqDic[header]):
+            ismsa = False
+            print('Not an MSA - offending sequence:{}'.format(header))
+            break
+        first = False
+    
+    return ismsa
+
 
 def fastaReader(datafile):
-    """Reads fasta files into a dictionary where keys are the sequence headers
+    """Reads fasta file into a dictionary where keys are the sequence headers
+    and values are sequences and a list of the headers to preserved order"""
+
+    fileHandle = open(datafile, 'r')
+    seqDic, listOrder = fastaReaderByHandle(fileHandle)
+    fileHandle.close()
+
+    return seqDic, listOrder
+
+
+def fastaReaderByHandle(fileHandle):
+    """Takes a fasta file handle into a dictionary where keys are the sequence headers
     and values are sequences and a list of the headers to preserved order"""
     listOrder = []
     seqDic = {}
     fastaBuffer = None
 
-    fileHandle = open(datafile, 'r')
     line = fastaBuffer if fastaBuffer else fileHandle.readline()
     while line:
         if line[0] != '>':
