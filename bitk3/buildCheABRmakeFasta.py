@@ -148,7 +148,39 @@ def _parseCheInfo(genes=[]):
                 # print(json.dumps(seqInfo['neighbors'][che],indent=2))
                 for info in seqInfo['neighbors'][che][-cheABRcounts[che]:]:
                     # print(info)
-                    info['header'] += '{}CONFLICT:{}'.format(bitk3.BITKTAGSEP, conflict[:-2])
+                    info['header'] += '{}CONFLICT:{}'.format(
+                        bitk3.BITKTAGSEP,
+                        conflict[:-2]
+                    )
+
+    return seqInfo
+
+
+def _addFastaInfo(seqInfo={}, aseq2seq={}, ac2header={}):
+    """ adds FASTA info to SeqInfo """
+
+    seqInfo['FASTA'] = {}
+
+    for che in seqInfo['neighbors'].keys():
+
+        fastaString = ''
+        for seq in seqInfo['neighbors'][che]:
+            try:
+                sequence = aseq2seq[seq['s']]
+            except KeyError:
+                sequence = 'None'
+            if seq['header']:
+                ac = seq['header'].split('|CONFLICT')[0]
+                fastaString += '>{}\n{}\n'.format(
+                    seq['header'].replace(ac, ac2header[ac]) + '::' + seq['headCheA'],
+                    sequence
+                )
+            else:
+                fastaString += '>{}\n{}\n'.format(
+                    ac2header[seq['headCheA']] + '|NOTFOUND',
+                    sequence
+                )
+        seqInfo['FASTA'][che] = fastaString
 
     return seqInfo
 
@@ -198,30 +230,12 @@ def main(cheaTagFileName='', geneNeighborhoodWindow=5):
             g['bitk3tag'] for g in cheBRgenes if g['p']['ac'] == ac
         ][0]
 
-    seqInfo['FASTA'] = {}
+    seqInfo = _addFastaInfo(seqInfo, aseq2seq, ac2bitk3tag)
 
-    for che in seqInfo['neighbors'].keys():
+    for che in seqInfo['neighbors'].keys():    
         filename = che + '.fa'
-        fastaString = ''
-        for seq in seqInfo['neighbors'][che]:
-            try:
-                sequence = aseq2seq[seq['s']]
-            except KeyError:
-                sequence = 'None'
-            if seq['header']:
-                ac = seq['header'].split('|CONFLICT')[0]
-                fastaString += '>{}\n{}\n'.format(
-                    seq['header'].replace(ac, ac2bitk3tag[ac]),
-                    sequence
-                )
-            else:
-                fastaString += '>{}\n{}\n'.format(
-                    ac2bitk3tag[seq['headCheA']] + '|NOTFOUND',
-                    sequence
-                )
-        seqInfo['FASTA'][che] = fastaString
         with open(filename, 'w') as f:
-            f.write(fastaString)
+            f.write(seqInfo['FASTA'][che])
 
     client.close()
 
