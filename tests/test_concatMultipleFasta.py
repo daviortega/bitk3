@@ -41,10 +41,10 @@ class TestNotUsingMiST22:
         f2 = io.StringIO(fasta2)
         fs = [f1, f2]
 
-        output = concatMultipleFasta.main(fs)
+        output = concatMultipleFasta.main(fs, noFiles=True)
 
         fastaConcat = '>Org1|locus1|Acce1|B|C|D\nAAAAAAAAAAAAAKKKKKKKKKKKKKKKARRRAAAAAAAAAAAKKKKKKKKKKKKKKKA\n>Org2|locus2|Acce2|B|C|D\nAAAAAAAAAAAAAKKKKKKKKKKKKKKKKRRAAAAAAAAAAAAKKKKKKKKKKKKKKKK\n>Org3|locus3|Acce3|A|C|D\nAAAAAAAAAAAAAKKKKKKKKKKKKKKKKRAARAAAAAAAEAAKKKKKKKKKKKKKKKK\n>Org4|locus4|Acce4|A|C|E\nAAAAAAAAAAAAAKKKKKKKKKKKKKKKKRAAARAAAAAAAAAKKKKKKKKKKKKKKKK\n'
-        assert fastaConcat == output['fastaConcat']
+        assert fastaConcat == output['fastaString']
 
         assocTable = [
             [

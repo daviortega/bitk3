@@ -1,6 +1,6 @@
 #!/usr/bin/python3.5
 import argparse
-import sys
+
 
 def _withSameNumberOfSequence(msaList=[]):
     first = True
@@ -10,7 +10,8 @@ def _withSameNumberOfSequence(msaList=[]):
             first = False
         else:
             if msaLen != len(seqList):
-                raise Exception('The number of sequences in one of the files is different than the others')
+                raise Exception('The number of sequences \
+in one of the files is different than the others')
     return True
 
 
@@ -59,21 +60,16 @@ def _parseData(dataSets=[]):
         fastaString += '{}\n'.format(sequence)
         assocTable.append(data)
 
-    with open('concat.fa', 'w') as f:
-        f.write(fastaString)
-
     partFileRaxml = _buildPartFileRaxml(dataSets)
-    with open('partitions.txt', 'w') as f:
-        f.write(partFileRaxml)
 
     output['partFileRaxml'] = partFileRaxml
-    output['fastaConcat'] = fastaString
+    output['fastaString'] = fastaString
     output['assocTable'] = assocTable
 
     return output
 
 
-def main(fastaFilesHandles=[]):
+def main(fastaFilesHandles=[], noFiles=False):
     """
     It will build a concatenated multiple fasta
 
@@ -95,11 +91,17 @@ def main(fastaFilesHandles=[]):
         if bitk3.isMSA(seqDic):
             dataSets.append([seqDic, listOrder])
         else:
-            print('The {} file in the list is not an MSA.'.format(i))
-            sys.exit()
+            raise Exception('The {} file in the list is not an MSA.'.format(i))
 
     _withSameNumberOfSequence(dataSets)
     output = _parseData(dataSets)
+
+    if not noFiles:
+        with open('concat.fa', 'w') as f:
+            f.write(output['fastaString'])
+
+        with open('partitions.txt', 'w') as f:
+            f.write(output['partFileRaxml'])
 
     return output
 
@@ -119,10 +121,17 @@ if __name__ == "__main__":
         nargs='+',
         help='1 or more fasta files'
     )
+    parser.add_argument(
+        '-nf',
+        '--noFiles',
+        action='store_true',
+        default=False,
+        help='Do not output file'
+    )
 
     args = parser.parse_args()
 
     fastaFilesHandles = args.fastaFilesHandles
-    main(fastaFilesHandles)
+    main(fastaFilesHandles, noFiles=args.noFiles)
 else:
     from bitk3 import bitk3
