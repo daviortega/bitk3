@@ -144,7 +144,12 @@ def test_getAseqFromMist22Gene():
     """ Test if it can get Aseq from gene info in MiST22 and pass None if there \
     is no protein info """
     sampleFile = dataPath + 'mistGenes.json'
-    expected = ['ulF-SXsxtnFn7TYkYb3hnw', None]
+    expected = [
+        'ulF-SXsxtnFn7TYkYb3hnw',
+        None,
+        'AtBd-8mQw2yws-ZrpoEQWA',
+        'BhwWfyWEGmZ3vyzusAAn3g'
+        ]
     with open(sampleFile, 'r') as f:
         genes = json.load(f)
     results = []
@@ -159,7 +164,11 @@ def test_getMistIDFromMist22Gene():
     """ Test if it can get internal protein gene ID from gene \
     info in MiST22 """
     sampleFile = dataPath + 'mistGenes.json'
-    expected = [333724, 333725]
+    expected = [
+        333724,
+        333725,
+        1113403,
+        241292]
     with open(sampleFile, 'r') as f:
         genes = json.load(f)
     results = []
@@ -174,7 +183,12 @@ def test_getAccessionFromMist22Gene():
     """ Test if it can get Accession from gene info in MiST22 \
     and pass None if there is no protein info"""
     sampleFile = dataPath + 'mistGenes.json'
-    expected = ['YP_003444191.1', None]
+    expected = [
+        'YP_003444191.1',
+        None,
+        'NP_233475.1',
+        'YP_003375864.1'
+    ]
     with open(sampleFile, 'r') as f:
         genes = json.load(f)
     results = []
@@ -188,7 +202,12 @@ def test_getAccessionFromMist22Gene():
 def test_getLocusFromMist22Gene():
     """ Test if it can get Locus from gene info in MiST22 """
     sampleFile = dataPath + 'mistGenes.json'
-    expected = ['Alvin_2240', 'Alvin_2241']
+    expected = [
+        'Alvin_2240',
+        'Alvin_2241',
+        'VCA1095',
+        'XALc_1369'
+    ]
     with open(sampleFile, 'r') as f:
         genes = json.load(f)
     results = []
@@ -202,7 +221,7 @@ def test_getLocusFromMist22Gene():
 def test_getGenomeIDFromMist22Gene():
     """ Test if it can get GenomeID from gene info in MiST22 """
     sampleFile = dataPath + 'mistGenes.json'
-    expected = [90, 90]
+    expected = [90, 90, 319, 65]
     with open(sampleFile, 'r') as f:
         genes = json.load(f)
     results = []
@@ -325,7 +344,9 @@ class TestUsingMist22:
         sampleFile = dataPath + 'mistGenes.json'
         expected = [
             'Al_vin_90|Alvin_2240|YP_003444191.1',
-            'Al_vin_90|Alvin_2241|None'
+            'Al_vin_90|Alvin_2241|None',
+            'Vi_cho_319|VCA1095|NP_233475.1',
+            'Xa_alb_65|XALc_1369|YP_003375864.1'            
         ]
         with open(sampleFile, 'r') as f:
             genes = json.load(f)
