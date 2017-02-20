@@ -1093,5 +1093,208 @@
       4500835
     ],
     "b": 2287521
+  },
+  {
+    "b": 1050278,
+    "a": 1052440,
+    "ps": false,
+    "l": 2163,
+    "gid": 319,
+    "gs_id": "ohUew9_0Y21HMztN2UkYBw",
+    "pos": 1006,
+    "aa": 1050278,
+    "_id": 1113403,
+    "lo": "VCA1095",
+    "neighborsAC": [
+        "NP_233469.1",
+        null,
+        "NP_233470.1",
+        "NP_233471.1",
+        "NP_233472.1",
+        "NP_233473.1",
+        "NP_233474.1",
+        "NP_233475.1",
+        "NP_233476.1",
+        "NP_233477.1",
+        "NP_233478.1",
+        "NP_233479.1",
+        "NP_233480.1",
+        "NP_233481.1",
+        "NP_233482.1"
+    ],
+    "st": "-",
+    "neighborsAseq": [
+        "QpctL60-ANyBk1aGp3W-hA",
+        null,
+        "jc8tmp9XtR6lTPMX3oSAlg",
+        "xj70OvOV0Ok4UHkJQriVvA",
+        "ConBlJawh0S9eNcwpUdStA",
+        "aXjcWvPeespvQZp3aap5LQ",
+        "qyHHt7NIZE1oStynXSwaLA",
+        "AtBd-8mQw2yws-ZrpoEQWA",
+        "MBG9AyB9JZ0g2yFduk70_w",
+        "6msMWTG01YKLCBo5dqqL4A",
+        "gA7NzCfTVtXu1kVp8hPZWg",
+        "x0OMwjtP2hGSk9pS-3btXg",
+        "d4_i8687rdGbPEaz-nj7_w",
+        "8DbYhpuU7Wa9FcYd6Ebnhg",
+        "fIzeM58TDyJN6daUHJ3o7g"
+    ],
+    "gc": 0.490522422561257,
+    "ab": 1052440,
+    "loc": "complement(1050278..1052440)",
+    "neighborsId": [
+        1113396,
+        1113397,
+        1113398,
+        1113399,
+        1113400,
+        1113401,
+        1113402,
+        1113403,
+        1113404,
+        1113405,
+        1113406,
+        1113407,
+        1113408,
+        1113409,
+        1113410
+    ],
+    "cid": 633,
+    "p": {
+        "pd": "chemotaxis protein CheA",
+        "ac": "NP_233475.1",
+        "l": 720,
+        "aid": "AtBd-8mQw2yws-ZrpoEQWA",
+        "n": "similar to GB:M34669 SP:P07363 PID:145529 PID:145530 GB:U00096; identified by sequence similarity",
+        "x": {
+            "gi": 15601844
+        }
+    },
+    "cheInfo": [
+        {"che": false},
+        {"che": false},
+        {"che": false},
+        {"che": "cher"},
+        {"che": false},
+        {"che": false},
+        {"che": false},
+        {"che": "thisChea"},
+        {"che": false},
+        {"che": false},
+        {"che": false},
+        {"che": false},
+        {"che": false},
+        {"che": false},
+        {"che": false}
+    ]
+  },
+  {
+    "ab": 1594111,
+    "b": 1592111,
+    "a": 1594111,
+    "ps": false,
+    "l": 2001,
+    "gid": 65,
+    "gs_id": "17p1jLVtEiNmBkev7qMUpA",
+    "lo": "XALc_1369",
+    "_id": 241292,
+    "aa": 1592111,
+    "neighborsAC": [
+        "YP_003375857.1",
+        "YP_003375858.1",
+        "YP_003375859.1",
+        "YP_003375860.1",
+        "YP_003375861.1",
+        "YP_003375862.1",
+        "YP_003375863.1",
+        "YP_003375864.1",
+        "YP_003375865.1",
+        "YP_003375866.1",
+        "YP_003375867.1",
+        "YP_003375868.1",
+        "YP_003375869.1",
+        "YP_003375870.1",
+        "YP_003375871.1"
+    ],
+    "ns": [
+        "cheA1"
+    ],
+    "pos": 1368,
+    "neighborsAseq": [
+        "vUAr5zs1PNT3_HmchtLDhw",
+        "gtDTgyPqWtBhOe7OvuQSxg",
+        "X5kaYb0eM1g2oePd9Vvs5Q",
+        "1VUoZ2RskO3Vza5ugyKhFw",
+        "9UguluIOplPu5F8fD6aUKw",
+        "qPySXeWOkgpYI9wTg5ozww",
+        "iBWZ0ms8qlrWP1hEmSrwQg",
+        "BhwWfyWEGmZ3vyzusAAn3g",
+        "B2S6964apP1AmxbFDVm7bQ",
+        "dLAsA9_MLAaMdtn7fyfzqQ",
+        "yJ_ChjwChhs8-vn7O4JpkQ",
+        "YgmGCDWP5oztQgfZd8Oitg",
+        "Q6ekvhB4N2reTt1Xz5cwGQ",
+        "moA_Wlbmqv4MnW2NB0SlXQ",
+        "o3o3B3ed_YKzjINKSuDgeg"
+    ],
+    "gc": 0.646676661669165,
+    "st": "-",
+    "loc": "complement(1592111..1594111)",
+    "neighborsId": [
+        241285,
+        241286,
+        241287,
+        241288,
+        241289,
+        241290,
+        241291,
+        241292,
+        241293,
+        241294,
+        241295,
+        241296,
+        241297,
+        241298,
+        241299
+    ],
+    "cid": 133,
+    "p": {
+        "pd": "chemotaxis protein chea",
+        "ac": "YP_003375864.1",
+        "l": 666,
+        "aid": "BhwWfyWEGmZ3vyzusAAn3g",
+        "f": [
+            [
+                "function",
+                "cell processes go:0009987; motility (incl. chemotaxis, energytaxis, aerotaxis, redoxtaxis) go:0042330"
+            ],
+            [
+                "inference",
+                "ab initio prediction:AutomaticValidationOfFrameDPredictionUsedWithbl a stxHitsSPTR"
+            ]
+        ],
+        "ec": "2.7.13.3",
+        "x": {
+            "gi": 285018153
+        }
+    },
+    "cheInfo": [
+        {"che": false},
+        {"che": false},
+        {"che": false},
+        {"che": false},
+        {"che": false},
+        {"che": false},
+        {"che": false},
+        {"che": "thisChea"},
+        {"che": false},
+        {"che": false},
+        {"che": false},
+        {"che": false},
+        {"che": false},
+        {"che": false},
+        {"che": "chea"}
+    ]
   }
 ]

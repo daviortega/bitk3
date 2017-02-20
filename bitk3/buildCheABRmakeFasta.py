@@ -140,13 +140,18 @@ def _parseCheInfo(genes=[]):
                     's': None,
                     'headCheA': cheAac
                 })
+                cheABRcounts[che] += 1
             if cheABRcounts[che] > 1:
                 conflict += '{}_{}, '.format(cheABRcounts[che], che)
 
+        #print('This is conflict: {}'.format(conflict))
         if conflict != '':
             for che in cheABRcounts.keys():
-                # print(che)
-                # print(json.dumps(seqInfo['neighbors'][che],indent=2))
+                import json
+                #print(che)
+                #print(cheABRcounts)
+                #print(json.dumps(seqInfo['neighbors'][che], indent=2))
+                #print(conflict)
                 for info in seqInfo['neighbors'][che][-cheABRcounts[che]:]:
                     # print(info)
                     infoToAdd = '{}CONFLICT:{}'.format(
@@ -174,18 +179,18 @@ def _addFastaInfo(seqInfo={}, aseq2seq={}, ac2header={}):
                 sequence = aseq2seq[seq['s']]
             except KeyError:
                 sequence = 'None'
-            if seq['header']:
+            if not seq['header'] or seq['header'][:5] == 'None|':
+                fastaString += '>{}\n{}\n'.format(
+                    ac2header[seq['headCheA']] + '|NOTFOUND',
+                    sequence
+                )
+            else:
                 ac = seq['header'].split('|CONFLICT')[0]
                 fastaString += '>{}\n{}\n'.format(
                     seq['header'].replace(
                         ac,
                         ac2header[ac]
                     ) + '::' + seq['headCheA'],
-                    sequence
-                )
-            else:
-                fastaString += '>{}\n{}\n'.format(
-                    ac2header[seq['headCheA']] + '|NOTFOUND',
                     sequence
                 )
         seqInfo['FASTA'][che] = fastaString

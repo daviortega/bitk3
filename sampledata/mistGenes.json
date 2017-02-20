@@ -54,5 +54,72 @@
         "ab": 2563448,
         "aa": 2563161,
         "lo": "Alvin_2241"
-    }
+    },
+    {
+    "_id": 1113403,
+    "cid": 633,
+    "gid": 319,
+    "l": 2163,
+    "a": 1052440,
+    "p": {
+      "ac": "NP_233475.1",
+      "l": 720,
+      "aid": "AtBd-8mQw2yws-ZrpoEQWA",
+      "x": {
+        "gi": 15601844
+      },
+      "pd": "chemotaxis protein CheA",
+      "n": "similar to GB:M34669 SP:P07363 PID:145529 PID:145530 GB:U00096; identified by sequence similarity"
+    },
+    "ab": 1052440,
+    "pos": 1006,
+    "lo": "VCA1095",
+    "ps": false,
+    "aa": 1050278,
+    "st": "-",
+    "b": 1050278,
+    "loc": "complement(1050278..1052440)",
+    "gc": 0.490522422561257,
+    "gs_id": "ohUew9_0Y21HMztN2UkYBw"
+  },
+  {
+    "_id": 241292,
+    "cid": 133,
+    "gid": 65,
+    "l": 2001,
+    "a": 1594111,
+    "pos": 1368,
+    "ab": 1594111,
+    "ns": [
+      "cheA1"
+    ],
+    "p": {
+      "ac": "YP_003375864.1",
+      "l": 666,
+      "aid": "BhwWfyWEGmZ3vyzusAAn3g",
+      "ec": "2.7.13.3",
+      "f": [
+        [
+          "function",
+          "cell processes go:0009987; motility (incl. chemotaxis, energytaxis, aerotaxis, redoxtaxis) go:0042330"
+        ],
+        [
+          "inference",
+          "ab initio prediction:AutomaticValidationOfFrameDPredictionUsedWithbl a stxHitsSPTR"
+        ]
+      ],
+      "x": {
+        "gi": 285018153
+      },
+      "pd": "chemotaxis protein chea"
+    },
+    "lo": "XALc_1369",
+    "ps": false,
+    "aa": 1592111,
+    "st": "-",
+    "b": 1592111,
+    "loc": "complement(1592111..1594111)",
+    "gc": 0.646676661669165,
+    "gs_id": "17p1jLVtEiNmBkev7qMUpA"
+  }
 ]
