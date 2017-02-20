@@ -34,11 +34,10 @@ class TestNotUsingMiST22:
     reason="Skipping this test on Travis CI."
 )
 class TestUsingMiST22:
-    '''def test_buildCheABRmakeFasta(self):
+    def test_buildCheABRmakeFasta(self):
         sampleFileStr = dataPath + 'cheaTags.txt'
-        window = 5
-        result = buildCheABRmakeFasta.main(sampleFileStr, window)
-        assert result == 0'''
+        window = 7
+        buildCheABRmakeFasta.main(sampleFileStr, window)
 
     def test__getNeighbors(self):
         geneNeighborhoodWindow = 7

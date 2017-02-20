@@ -1,5 +1,7 @@
 #!/usr/bin/python3.5
 import argparse
+import time
+import json
 
 
 def _getSigTransInfoOfNeighbors(mist22Client, gene={}):
@@ -148,10 +150,14 @@ def _parseCheInfo(genes=[]):
                 # print(json.dumps(seqInfo['neighbors'][che],indent=2))
                 for info in seqInfo['neighbors'][che][-cheABRcounts[che]:]:
                     # print(info)
-                    info['header'] += '{}CONFLICT:{}'.format(
+                    infoToAdd = '{}CONFLICT:{}'.format(
                         bitk3.BITKTAGSEP,
                         conflict[:-2]
                     )
+                    if info['header']:
+                        info['header'] += infoToAdd
+                    else:
+                        info['header'] = 'None{}'.format(infoToAdd)
 
     return seqInfo
 
@@ -188,7 +194,7 @@ def _addFastaInfo(seqInfo={}, aseq2seq={}, ac2header={}):
     return seqInfo
 
 
-def main(cheaTagFileName='', geneNeighborhoodWindow=5):
+def main(cheaTagFileName='', geneNeighborhoodWindow=5, verbose=False):
     """
     It will build a concatenated alignment of CheABR
 
@@ -205,40 +211,86 @@ def main(cheaTagFileName='', geneNeighborhoodWindow=5):
     0 is it does not fail
 
     """
+    start = time.perf_counter()
+    if verbose:
+        print('Starting the system')
+
     cheaAC = {}
 
     client = bitk3.get_mist22_client()
     mist22 = client.mist22
 
+    if verbose:
+        print('loading the info: ')
     with open(cheaTagFileName, 'r') as f:
         for tag in f:
             tag = tag.replace('\n', '')
             accession = bitk3.bitk3tagToAccession(tag)
             cheaAC[accession] = tag
 
+    tic = time.perf_counter()
+    if verbose:
+        print('\tCompleted in: {:.4} seconds'.format(tic - start))
+        print('Getting genes from accession')
     genes, badAC = bitk3.accessionToGeneInfo(cheaAC)
+    toc = time.perf_counter()
+    if verbose:
+        print('\tCompleted in: {:.4} seconds'.format(toc - tic))
+        print('getting info on neighborh genes')
     for gene in genes:
         gene = _getNeighbors(mist22, gene, geneNeighborhoodWindow)
         gene = _getSigTransInfoOfNeighbors(mist22, gene)
-
+    tic = time.perf_counter()
+    if verbose:
+        print('\tCompleted in: {:.4} seconds'.format(tic - toc))
+        print('Pasring the info')
     seqInfo = _parseCheInfo(genes)
+    toc = time.perf_counter()
+    if verbose:
+        print('\tCompleted in: {:.4} seconds'.format(toc - tic))
+        print('Getting aseqs')
     aseq2seq = bitk3.getSeqFromAseq(seqInfo['aseqs'])
-
+    tic = time.perf_counter()
+    if verbose:
+        print('\tCompleted in: {:.4} seconds'.format(tic - toc))
+        print('Getting info relevant to neighbor genes')
     cheBRgenes, badAC = bitk3.accessionToGeneInfo(seqInfo['cheABRac'])
+    toc = time.perf_counter()
+    if verbose:
+        print('\tCompleted in: {:.4} seconds'.format(toc - tic))
+        print('adding bitk3tags')
     cheBRgenes = bitk3.addBitk3tagTomist22GeneInfo(cheBRgenes)
-
-    ac2bitk3tag = {None: None}
+    tic = time.perf_counter()
+    if verbose:
+        print('\tCompleted in: {:.4} seconds'.format(tic - toc))
+        print('making dictionary between bitk3tag and ac')
+    ac2bitk3tag = {None: None, 'None': 'None'}
     for i, ac in enumerate(seqInfo['cheABRac']):
         ac2bitk3tag[ac] = [
             g['bitk3tag'] for g in cheBRgenes if g['p']['ac'] == ac
         ][0]
-
+    toc = time.perf_counter()
+    if verbose:
+        print('\tCompleted in: {:.4} seconds'.format(toc - tic))
+        print('Making fasta')
     seqInfo = _addFastaInfo(seqInfo, aseq2seq, ac2bitk3tag)
+    tic = time.perf_counter()
+    if verbose:
+        print('\tCompleted in: {:.4} seconds'.format(tic - toc))
 
+    if verbose:
+        print('writing files')
     for che in seqInfo['neighbors'].keys():
         filename = che + '.fa'
         with open(filename, 'w') as f:
             f.write(seqInfo['FASTA'][che])
+    toc = time.perf_counter()
+    if verbose:
+        print('\tCompleted in: {:.4} seconds'.format(toc - tic))
+        print('Done. Total time of execution for {} tags = {:.4}'.format(
+            len(accession),
+            toc - start)
+        )
 
     client.close()
 
@@ -261,12 +313,18 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         'geneNeighborhoodWindow',
-        metavar='5',
+        metavar='numberOfGenes',
         type=int,
         nargs='?',
         default=5,
         help='Integer of the gene neighborhood window \
         to search for CheB or CheR'
+    )
+    parser.add_argument(
+        '-v',
+        '--verbose',
+        action='store_true',
+        help='Print statements'
     )
 
     args = parser.parse_args()
@@ -274,6 +332,6 @@ if __name__ == "__main__":
     cheaTagFileName = args.cheaTagFileName
     geneNeighborhoodWindow = args.geneNeighborhoodWindow
 
-    main(cheaTagFileName, geneNeighborhoodWindow)
+    main(cheaTagFileName, geneNeighborhoodWindow, args.verbose)
 else:
     from bitk3 import bitk3
