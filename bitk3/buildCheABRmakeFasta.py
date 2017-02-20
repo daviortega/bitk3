@@ -332,7 +332,7 @@ if __name__ == "__main__":
         '--noFiles',
         action='store_true',
         default=False,
-        help='Print statements'
+        help='Do not output file'
     )
 
     args = parser.parse_args()
