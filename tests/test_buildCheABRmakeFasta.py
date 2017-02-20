@@ -34,28 +34,6 @@ class TestNotUsingMiST22:
     reason="Skipping this test on Travis CI."
 )
 class TestUsingMiST22:
-    def test_buildCheABRmakeFasta_bug(self):
-        sampleFileStr = dataPath + 'cheaTags.txt'
-        window = 7
-        buildCheABRmakeFasta.main(
-            sampleFileStr,
-            window,
-            verbose=False,
-            noFiles=True
-        )
-
-        fastaList_expected = {
-            'chea': [
-                'Vi_cho_319|VCA1095|NP_233475.1::NP_233475.1'
-            ],
-            'cheb': [
-                'Vi_cho_319|VCA1095|NP_233475.1|NOTFOUND'
-            ],
-            'cher': [
-                'Vi_cho_319|VCA1091|NP_233471.1::NP_233475.1'
-            ]
-        }
-
     def test_buildCheABRmakeFasta_execution(self):
         sampleFileStr = dataPath + 'cheaTags.txt'
         window = 7

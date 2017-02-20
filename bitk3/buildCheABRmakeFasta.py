@@ -144,14 +144,8 @@ def _parseCheInfo(genes=[]):
             if cheABRcounts[che] > 1:
                 conflict += '{}_{}, '.format(cheABRcounts[che], che)
 
-        #print('This is conflict: {}'.format(conflict))
         if conflict != '':
             for che in cheABRcounts.keys():
-                import json
-                #print(che)
-                #print(cheABRcounts)
-                #print(json.dumps(seqInfo['neighbors'][che], indent=2))
-                #print(conflict)
                 for info in seqInfo['neighbors'][che][-cheABRcounts[che]:]:
                     # print(info)
                     infoToAdd = '{}CONFLICT:{}'.format(
