@@ -37,7 +37,12 @@ class TestUsingMiST22:
     def test_buildCheABRmakeFasta(self):
         sampleFileStr = dataPath + 'cheaTags.txt'
         window = 7
-        buildCheABRmakeFasta.main(sampleFileStr, window)
+        buildCheABRmakeFasta.main(
+            sampleFileStr,
+            window,
+            verbose=False,
+            noFiles=True
+        )
 
     def test__getNeighbors(self):
         geneNeighborhoodWindow = 7

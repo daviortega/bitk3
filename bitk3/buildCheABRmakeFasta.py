@@ -1,7 +1,6 @@
 #!/usr/bin/python3.5
 import argparse
 import time
-import json
 
 
 def _getSigTransInfoOfNeighbors(mist22Client, gene={}):
@@ -194,7 +193,7 @@ def _addFastaInfo(seqInfo={}, aseq2seq={}, ac2header={}):
     return seqInfo
 
 
-def main(cheaTagFileName='', geneNeighborhoodWindow=5, verbose=False):
+def main(cheaTagFileName='', geneNeighborhoodWindow=5, verbose=False, noFiles=False):
     """
     It will build a concatenated alignment of CheABR
 
@@ -280,10 +279,12 @@ def main(cheaTagFileName='', geneNeighborhoodWindow=5, verbose=False):
 
     if verbose:
         print('writing files')
-    for che in seqInfo['neighbors'].keys():
-        filename = che + '.fa'
-        with open(filename, 'w') as f:
-            f.write(seqInfo['FASTA'][che])
+
+    if not noFiles:
+        for che in seqInfo['neighbors'].keys():
+            filename = che + '.fa'
+            with open(filename, 'w') as f:
+                f.write(seqInfo['FASTA'][che])
     toc = time.perf_counter()
     if verbose:
         print('\tCompleted in: {:.4} seconds'.format(toc - tic))
@@ -326,12 +327,19 @@ if __name__ == "__main__":
         action='store_true',
         help='Print statements'
     )
+    parser.add_argument(
+        '-nf',
+        '--noFiles',
+        action='store_true',
+        default=False,
+        help='Print statements'
+    )
 
     args = parser.parse_args()
 
     cheaTagFileName = args.cheaTagFileName
     geneNeighborhoodWindow = args.geneNeighborhoodWindow
 
-    main(cheaTagFileName, geneNeighborhoodWindow, args.verbose)
+    main(cheaTagFileName, geneNeighborhoodWindow, args.verbose, args.noFiles)
 else:
     from bitk3 import bitk3
