@@ -292,6 +292,19 @@ def main(cheaTagFileName='', geneNeighborhoodWindow=5, verbose=False, noFiles=Fa
             toc - start)
         )
 
+        print('\n\n============Stats report===========')
+        ches = ['chea', 'cheb', 'cher']
+        print('\t\t{}\t{}\t{}'.format(*ches))
+        print('-----------------------------------')
+        confCount = ''
+        notFoundCount = ''
+        for che in ches:
+            confCount += '\t {}'.format(seqInfo['FASTA'][che].count('CONFLICT'))
+            notFoundCount += '\t {}'.format(seqInfo['FASTA'][che].count('NOTFOUND'))
+        print('CONFLICT{}'.format(confCount))
+        print('NOTFOUND{}'.format(notFoundCount))
+        print('')
+
     client.close()
 
     return seqInfo
