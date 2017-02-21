@@ -194,7 +194,8 @@ def _addFastaInfo(seqInfo={}, aseq2seq={}, ac2header={}):
 
 def _printStatsReport(seqInfo={}):
     print('\n\n============Stats report===========')
-    ches = seqInfo['FASTA'].keys().sort()
+    ches = list(seqInfo['FASTA'].keys())
+    ches.sort()
     print('\t\t{}\t{}\t{}'.format(*ches))
     print('-----------------------------------')
     confCount = ''
