@@ -17,6 +17,37 @@ myPath = os.getcwd()
 dataPath = myPath + '/sampledata/'
 
 
+@pytest.mark.skip(reason='no time now')
+class PendingTests:
+    def test_addFastaInfo(self):
+        expected = {
+            'chea': '',
+            'cheb': '',
+            'cher': ''
+        }
+        with open(dataPath + 'seqInfo.sample.new.json', 'r') as f:
+            seqInfo = json.load(f)
+
+        assert 'FASTA' not in seqInfo.keys()
+
+        newSeqInfo = buildCheABRmakeFasta._addFastaInfo(seqInfo)
+
+        assert newSeqInfo['FASTA']
+
+        for che in newSeqInfo['neighbors'].keys():
+            assert newSeqInfo['FASTA'][che] == expected[che]
+
+    def test_printStatsReport(self):
+        with open(dataPath + 'seqInfo.sample.new.json', 'r') as f:
+            seqInfo = json.load(f)
+
+        confCount, notFoundCount = buildCheABRmakeFasta._printStatsReport(
+            seqInfo
+        )
+
+        assert confCount == 1
+        assert notFoundCount == '3231'
+
 class TestNotUsingMiST22:
     def test_parseCheInfo(self):
         with open(dataPath + 'mistGenes.more.json', 'r') as f:
@@ -27,6 +58,7 @@ class TestNotUsingMiST22:
         seqInfo = buildCheABRmakeFasta._parseCheInfo(genes)
 
         assert seqInfo == expected
+
 
 
 @pytest.mark.skipif(
@@ -161,14 +193,14 @@ class TestUsingMiST22:
                     "l": 2163,
                     "a": 1052440,
                     "p": {
-                    "ac": "NP_233475.1",
-                    "l": 720,
-                    "aid": "AtBd-8mQw2yws-ZrpoEQWA",
-                    "x": {
-                        "gi": 15601844
-                    },
-                    "pd": "chemotaxis protein CheA",
-                    "n": "similar to GB:M34669 SP:P07363 PID:145529 PID:145530 GB:U00096; identified by sequence similarity"
+                        "ac": "NP_233475.1",
+                        "l": 720,
+                        "aid": "AtBd-8mQw2yws-ZrpoEQWA",
+                        "x": {
+                            "gi": 15601844
+                        },
+                        "pd": "chemotaxis protein CheA",
+                        "n": "similar to GB:M34669 SP:P07363 PID:145529 PID:145530 GB:U00096; identified by sequence similarity"
                     },
                     "ab": 1052440,
                     "pos": 1006,
@@ -377,14 +409,14 @@ class TestUsingMiST22:
                         "l": 666,
                         "aid": "BhwWfyWEGmZ3vyzusAAn3g",
                         "f": [
-                        [
-                            "function",
-                            "cell processes go:0009987; motility (incl. chemotaxis, energytaxis, aerotaxis, redoxtaxis) go:0042330"
-                        ],
-                        [
-                            "inference",
-                            "ab initio prediction:AutomaticValidationOfFrameDPredictionUsedWithbl a stxHitsSPTR"
-                        ]
+                            [
+                                "function",
+                                "cell processes go:0009987; motility (incl. chemotaxis, energytaxis, aerotaxis, redoxtaxis) go:0042330"
+                            ],
+                            [
+                                "inference",
+                                "ab initio prediction:AutomaticValidationOfFrameDPredictionUsedWithbl a stxHitsSPTR"
+                            ]
                         ],
                         "ec": "2.7.13.3",
                         "x": {
@@ -835,14 +867,14 @@ class TestUsingMiST22:
                         "l": 666,
                         "aid": "BhwWfyWEGmZ3vyzusAAn3g",
                         "f": [
-                        [
-                            "function",
-                            "cell processes go:0009987; motility (incl. chemotaxis, energytaxis, aerotaxis, redoxtaxis) go:0042330"
-                        ],
-                        [
-                            "inference",
-                            "ab initio prediction:AutomaticValidationOfFrameDPredictionUsedWithbl a stxHitsSPTR"
-                        ]
+                            [
+                                "function",
+                                "cell processes go:0009987; motility (incl. chemotaxis, energytaxis, aerotaxis, redoxtaxis) go:0042330"
+                            ],
+                            [
+                                "inference",
+                                "ab initio prediction:AutomaticValidationOfFrameDPredictionUsedWithbl a stxHitsSPTR"
+                            ]
                         ],
                         "ec": "2.7.13.3",
                         "x": {
@@ -971,4 +1003,3 @@ class TestUsingMiST22:
             assert gene == expected
 
         client.close()
-    

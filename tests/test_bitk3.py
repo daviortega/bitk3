@@ -37,7 +37,10 @@ def test_fastaReader_lists():
 
 
 def test_fastaReader_dictionary_fileWithSpaces():
-    """test for fasta_reader to see if fix spaces in sequences correct dictionary"""
+    """
+    test for fasta_reader to see if fix spaces
+    in sequences correct dictionary
+    """
     sampleFile = dataPath + 'fasta.with.bitk.tags.withSpaces.fa'
     seqInfo = bitk3.fastaReader(sampleFile)
     assert seqInfo[0] == {
@@ -346,7 +349,7 @@ class TestUsingMist22:
             'Al_vin_90|Alvin_2240|YP_003444191.1',
             'Al_vin_90|Alvin_2241|None',
             'Vi_cho_319|VCA1095|NP_233475.1',
-            'Xa_alb_65|XALc_1369|YP_003375864.1'            
+            'Xa_alb_65|XALc_1369|YP_003375864.1'
         ]
         with open(sampleFile, 'r') as f:
             genes = json.load(f)
