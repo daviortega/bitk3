@@ -161,7 +161,7 @@ def _parseCheInfo(genes=[]):
 
 
 def _addFastaInfo(seqInfo={}, aseq2seq={}, ac2header={}):
-    """ adds FASTA info to SeqInfo """
+    """ adds FASTA info to seqInfo """
 
     seqInfo['FASTA'] = {}
 
@@ -192,7 +192,32 @@ def _addFastaInfo(seqInfo={}, aseq2seq={}, ac2header={}):
     return seqInfo
 
 
-def main(cheaTagFileName='', geneNeighborhoodWindow=5, verbose=False, noFiles=False):
+def _printStatsReport(seqInfo={}):
+    print('\n\n============Stats report===========')
+    ches = seqInfo['FASTA'].keys().sort()
+    print('\t\t{}\t{}\t{}'.format(*ches))
+    print('-----------------------------------')
+    confCount = ''
+    notFoundCount = ''
+    for che in ches:
+        confCount += '\t {}'.format(
+            seqInfo['FASTA'][che].count('CONFLICT')
+        )
+        notFoundCount += '\t {}'.format(
+            seqInfo['FASTA'][che].count('NOTFOUND')
+        )
+    print('CONFLICT{}'.format(confCount))
+    print('NOTFOUND{}'.format(notFoundCount))
+    print('')
+
+    return confCount, notFoundCount
+
+
+def main(
+        cheaTagFileName='',
+        geneNeighborhoodWindow=5,
+        verbose=False,
+        noFiles=False):
     """
     It will build a concatenated alignment of CheABR
 
@@ -291,19 +316,7 @@ def main(cheaTagFileName='', geneNeighborhoodWindow=5, verbose=False, noFiles=Fa
             len(accession),
             toc - start)
         )
-
-        print('\n\n============Stats report===========')
-        ches = ['chea', 'cheb', 'cher']
-        print('\t\t{}\t{}\t{}'.format(*ches))
-        print('-----------------------------------')
-        confCount = ''
-        notFoundCount = ''
-        for che in ches:
-            confCount += '\t {}'.format(seqInfo['FASTA'][che].count('CONFLICT'))
-            notFoundCount += '\t {}'.format(seqInfo['FASTA'][che].count('NOTFOUND'))
-        print('CONFLICT{}'.format(confCount))
-        print('NOTFOUND{}'.format(notFoundCount))
-        print('')
+        _printStatsReport(seqInfo)
 
     client.close()
 
