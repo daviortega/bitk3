@@ -4,3 +4,4 @@ branch = True
 [report]
 exclude_lines =
 	if __name__ == .__main__.:
+	it __package__ == '':
