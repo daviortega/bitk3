@@ -1,10 +1,15 @@
+#if __name__ == "__main__" and __package__ is None:
+#    __package__ = "bitk3"
 
-from os import sys, path
-sys.path.append(path.dirname(path.dirname('../../')))
+if __package__ == '':
+    from os import sys, path
+    sys.path.append(path.dirname(path.dirname(__file__)))
+    import bitk3
+else:
+    from bitk3 import bitk3
+print(__package__)
 
 import warnings
-from bitk3 import bitk3
-
 
 class Accession2fasta:
     def __init__(self, accessionList):
