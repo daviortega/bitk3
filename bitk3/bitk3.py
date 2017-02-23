@@ -192,7 +192,7 @@ def cleanListOfAccessions(accessionList=[]):
     return newList, badTypes
 
 
-def accessionToGeneInfo(accessionList=[]):
+def accessionToMist22GeneInfo(accessionList=[]):
     """ Read a list of accession and returns a generator to run \
     over all info from the genes"""
 
@@ -295,34 +295,42 @@ def getGenomeInfoFromMistIDs(gids=[]):
     return genDic
 
 
-def addBitk3tagTomist22GeneInfo(genes=[]):
+def addBitk3tagToMist22GeneInfo(genes=[]):
     """ Build bitk3 tag for fasta sequences from list of mist22 genes """
     gids = []
 
+    oldGenes = []
+
     for gene in genes:
-        mistGenomeId = getGenomeIDFromMist22Gene(gene)
-        if mistGenomeId not in gids:
-            gids.append(mistGenomeId)
+        print(gene)
+        if isinstance(gene, dict):
+            mistGenomeId = getGenomeIDFromMist22Gene(gene)
+            if mistGenomeId not in gids:
+                gids.append(mistGenomeId)
+            oldGenes.append(gene)
+        else:
+            oldGenes.append(None)
 
     genDic = getGenomeInfoFromMistIDs(gids)
 
     newGenes = []
+    for gene in oldGenes:
+        if gene:
+            mistGenomeId = getGenomeIDFromMist22Gene(gene)
+            lo = getLocusFromMist22Gene(gene)
+            accession = getAccessionFromMist22Gene(gene)
+            genus = genDic[mistGenomeId]['g']
+            species = genDic[mistGenomeId]['sp']
 
-    for gene in genes:
-        mistGenomeId = getGenomeIDFromMist22Gene(gene)
-        lo = getLocusFromMist22Gene(gene)
-        accession = getAccessionFromMist22Gene(gene)
-        genus = genDic[mistGenomeId]['g']
-        species = genDic[mistGenomeId]['sp']
+            bitk3genID = (str(genus[:2]) + BITKGENSEP + str(species[:3]) +
+                        BITKGENSEP + str(mistGenomeId))
 
-        bitk3genID = (str(genus[:2]) + BITKGENSEP + str(species[:3]) +
-                      BITKGENSEP + str(mistGenomeId))
+            bitk3tag = (bitk3genID + BITKTAGSEP + str(lo) +
+                        BITKTAGSEP + str(accession))
 
-        bitk3tag = (bitk3genID + BITKTAGSEP + str(lo) +
-                    BITKTAGSEP + str(accession))
-
-        gene['bitk3tag'] = bitk3tag
+            gene['bitk3tag'] = bitk3tag
         newGenes.append(gene)
+
 
     return newGenes
 
@@ -335,3 +343,20 @@ def getSeqFromAseq(aseqs=[]):
         for seq in seqs:
             aseq2seq[seq['data']['id']] = seq['data']['s']
     return aseq2seq
+
+
+def addSeqToMist22GeneInfo(genes=[]):
+    aseqs = []
+    for gene in genes:
+        aseq = getAseqFromMist22Gene(gene)
+        if aseq:
+            aseqs.append(aseq)
+    aseq2seq = getSeqFromAseq(aseqs)
+
+    newGenes = []
+    for gene in genes:
+        aseq = getAseqFromMist22Gene(gene)
+        gene['seq'] = aseq2seq[aseq]
+        newGenes.append(gene)
+
+    return newGenes

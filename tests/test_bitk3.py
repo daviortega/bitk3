@@ -160,7 +160,7 @@ def test_getAseqFromMist22Gene():
         result = bitk3.getAseqFromMist22Gene(gene)
         results.append(result)
     assert expected == results
-    return 0
+    return 1
 
 
 def test_getMistIDFromMist22Gene():
@@ -179,7 +179,7 @@ def test_getMistIDFromMist22Gene():
         result = bitk3.getMistIDFromMist22Gene(gene)
         results.append(result)
     assert expected == results
-    return 0
+    return 1
 
 
 def test_getAccessionFromMist22Gene():
@@ -199,7 +199,7 @@ def test_getAccessionFromMist22Gene():
         result = bitk3.getAccessionFromMist22Gene(gene)
         results.append(result)
     assert expected == results
-    return 0
+    return 1
 
 
 def test_getLocusFromMist22Gene():
@@ -218,7 +218,7 @@ def test_getLocusFromMist22Gene():
         result = bitk3.getLocusFromMist22Gene(gene)
         results.append(result)
     assert expected == results
-    return 0
+    return 1
 
 
 def test_getGenomeIDFromMist22Gene():
@@ -232,7 +232,7 @@ def test_getGenomeIDFromMist22Gene():
         result = bitk3.getGenomeIDFromMist22Gene(gene)
         results.append(result)
     assert expected == results
-    return 0
+    return 1
 
 
 def test_isValidRefSeqAccession():
@@ -248,7 +248,7 @@ def test_isValidRefSeqAccession():
         expected, inp = fixture
         assert expected == bitk3.isValidRefSeqAccession(inp)
 
-    return 0
+    return 1
 
 
 def test_getSeqFromAseq():
@@ -290,7 +290,7 @@ TRSARHTTELKKIPQKIPTLARVTPKPKAMTPKLNKADQDEWEEF'
     for i, aseq in enumerate(aseqs):
         assert aseq2seq[aseq] == seqs[i]
 
-    return 0
+    return 1
 
 
 def test_isMSA_False():
@@ -302,7 +302,7 @@ def test_isMSA_False():
     }
 
     assert not bitk3.isMSA(seqInfo)
-    return 0
+    return 1
 
 
 def test_isMSA_True():
@@ -314,7 +314,7 @@ def test_isMSA_True():
     }
 
     assert bitk3.isMSA(seqInfo)
-    return 0
+    return 1
 
 
 @pytest.mark.skipif(
@@ -322,15 +322,17 @@ def test_isMSA_True():
     reason="Skipping this test on Travis CI."
 )
 class TestUsingMist22:
-    def test_accession2GeneInfo(self):
+    def test_accessionToMist22GeneInfo(self):
         accessions = [
             'REF_ETEC:AX27061_2429',
             'YP_001452647.1',
             'YP_574071.1',
-            None
+            None,
+            '',
+            'BN118_1445'
         ]
 
-        genes, badTypes = bitk3.accessionToGeneInfo(accessions)
+        genes, badTypes = bitk3.accessionToMist22GeneInfo(accessions)
         assert isinstance(genes, list)
         assert isinstance(badTypes, list)
 
@@ -340,9 +342,9 @@ class TestUsingMist22:
         for ac in accessions:
             assert ac in listOfRetrievedAC
 
-        return 0
+        return 1
 
-    def test_addBitk3tagTomist22GeneInfo(self):
+    def test_addBitk3tagToMist22GeneInfo(self):
         """ Test if it can generate a bitk3 tag from gene info in MiST22 """
         sampleFile = dataPath + 'mistGenes.json'
         expected = [
@@ -353,9 +355,24 @@ class TestUsingMist22:
         ]
         with open(sampleFile, 'r') as f:
             genes = json.load(f)
-        genes = bitk3.addBitk3tagTomist22GeneInfo(genes)
+        genes = bitk3.addBitk3tagToMist22GeneInfo(genes)
 
         listOfBitk3tag = [gene['bitk3tag'] for gene in genes]
 
         assert set(expected) == set(listOfBitk3tag)
-        return 0
+        return 1
+
+    def test_addBitk3tagToMist22GeneInfo_withoutGene(self):
+        """ Test if it can generate a bitk3 tag from gene info in MiST22 """
+        genes = [
+            '',
+            [],
+            (),
+            1231
+        ]
+        genes = bitk3.addBitk3tagToMist22GeneInfo(genes)
+
+        for gene in genes:
+            assert not gene
+
+        return 1
