@@ -1,6 +1,3 @@
-#if __name__ == "__main__" and __package__ is None:
-#    __package__ = "bitk3"
-
 if __package__ == '':
     from os import sys, path
     sys.path.append(path.dirname(path.dirname(__file__)))
@@ -10,6 +7,7 @@ else:
 print(__package__)
 
 import warnings
+
 
 class Accession2fasta:
     def __init__(self, accessionList):
@@ -42,5 +40,6 @@ class Accession2fasta:
             else:
                 self._throw_warning(accessions[i])
         return fasta
+
 
 
