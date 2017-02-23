@@ -256,7 +256,7 @@ def main(
     if verbose:
         print('\tCompleted in: {:.4} seconds'.format(tic - start))
         print('Getting genes from accession')
-    genes, badAC = bitk3.accessionToGeneInfo(cheaAC)
+    genes, badAC = bitk3.accessionToMist22GeneInfo(cheaAC)
     toc = time.perf_counter()
     if verbose:
         print('\tCompleted in: {:.4} seconds'.format(toc - tic))
@@ -278,12 +278,12 @@ def main(
     if verbose:
         print('\tCompleted in: {:.4} seconds'.format(tic - toc))
         print('Getting info relevant to neighbor genes')
-    cheBRgenes, badAC = bitk3.accessionToGeneInfo(seqInfo['cheABRac'])
+    cheBRgenes, badAC = bitk3.accessionToMist22GeneInfo(seqInfo['cheABRac'])
     toc = time.perf_counter()
     if verbose:
         print('\tCompleted in: {:.4} seconds'.format(toc - tic))
         print('adding bitk3tags')
-    cheBRgenes = bitk3.addBitk3tagTomist22GeneInfo(cheBRgenes)
+    cheBRgenes = bitk3.addBitk3tagToMist22GeneInfo(cheBRgenes)
     tic = time.perf_counter()
     if verbose:
         print('\tCompleted in: {:.4} seconds'.format(tic - toc))

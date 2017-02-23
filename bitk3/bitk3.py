@@ -302,7 +302,6 @@ def addBitk3tagToMist22GeneInfo(genes=[]):
     oldGenes = []
 
     for gene in genes:
-        print(gene)
         if isinstance(gene, dict):
             mistGenomeId = getGenomeIDFromMist22Gene(gene)
             if mistGenomeId not in gids:
