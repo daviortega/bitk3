@@ -323,14 +323,13 @@ def addBitk3tagToMist22GeneInfo(genes=[]):
             species = genDic[mistGenomeId]['sp']
 
             bitk3genID = (str(genus[:2]) + BITKGENSEP + str(species[:3]) +
-                        BITKGENSEP + str(mistGenomeId))
+                          BITKGENSEP + str(mistGenomeId))
 
             bitk3tag = (bitk3genID + BITKTAGSEP + str(lo) +
                         BITKTAGSEP + str(accession))
 
             gene['bitk3tag'] = bitk3tag
         newGenes.append(gene)
-
 
     return newGenes
 
