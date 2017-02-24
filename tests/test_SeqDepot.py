@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import SeqDepot
+from bitk3 import SeqDepot
 import unittest
 import io
 import os
