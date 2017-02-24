@@ -40,7 +40,6 @@ setup(
     author="Davi Ortega",
     author_email='ortegad@caltech.edu',
     url='https://github.com/daviortega/bitk3',
-    scripts=['bin/*bk3'],
     packages=[
         'bitk3',
     ],
