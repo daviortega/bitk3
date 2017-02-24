@@ -1,6 +1,12 @@
 # -*- coding: utf-8 -*-
 """This is the BITK for python 3"""
-import SeqDepot
+if __package__ == '':
+    from os import sys, path
+    sys.path.append(path.dirname(path.dirname(__file__)))
+    import SeqDepot
+else:
+    from bitk3 import SeqDepot
+
 import pymongo
 import sys
 import re
@@ -358,3 +364,37 @@ def addSeqToMist22GeneInfo(genes=[]):
         newGenes.append(gene)
 
     return newGenes
+
+
+def insertMethod(filename, method):
+    """
+    Insert the method right before the extension separated by dot
+
+    keywords:
+        filename (string) - string of the original filename
+        method (string) - string of the method identifier
+
+    return:
+        newFileName (string) - string of the new filename
+    """
+    filenamenew = filename.split('.')
+    filenamenew.insert(len(filenamenew)-1, method)
+    filenamenew = '.'.join(filenamenew)
+    return filenamenew
+
+
+def changeExtension(filename, extension):
+    """
+    Change the extension of the filename
+
+    keywords:
+        filename (string) - string of the original filename
+        extension (string) - string of the extension identifier
+
+    return:
+        newFileName (string) - string of the new filename
+    """
+    filenamenew = filename.split('.')
+    filenamenew[-1] = extension
+    filenamenew = '.'.join(filenamenew)
+    return filenamenew

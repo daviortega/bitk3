@@ -1,0 +1,2 @@
+BINPATH=`dirname $0`
+python "$BINPATH/../bitk3/smallerHeader/main.py" $@

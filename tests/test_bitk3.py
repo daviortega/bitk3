@@ -317,6 +317,32 @@ def test_isMSA_True():
     return 1
 
 
+def test_insertMethod():
+    fixtures = [
+        ['my.name.fa', 'method1', 'my.name.method1.fa'],
+        ['my_name.txt', 'method2', 'my_name.method2.txt'],
+        ['my_name.txt', 'method3.2', 'my_name.method3.2.txt']
+    ]
+
+    for fixture in fixtures:
+        assert bitk3.insertMethod(fixture[0], fixture[1]) == fixture[2]
+
+        return 1
+
+
+def test_changeExtension():
+    fixtures = [
+        ['my.name.fa', 'faa', 'my.name.faa'],
+        ['my_name.txt', 'fa', 'my_name.fa'],
+        ['my_name.list', 'ac', 'my_name.ac']
+    ]
+
+    for fixture in fixtures:
+        assert bitk3.changeExtension(fixture[0], fixture[1]) == fixture[2]
+
+        return 1
+
+
 @pytest.mark.skipif(
     "TRAVIS" in os.environ and os.environ["TRAVIS"] == "true",
     reason="Skipping this test on Travis CI."
