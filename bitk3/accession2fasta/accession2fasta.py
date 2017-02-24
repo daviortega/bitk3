@@ -4,8 +4,6 @@ if __package__ == '':
     import bitk3
 else:
     from bitk3 import bitk3
-print(__package__)
-
 import warnings
 
 

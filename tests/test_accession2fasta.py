@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-test_countFeatureInHeaders
+test_accession2fasta.py
 ----------------------------------
 
 Tests for `accession2fasta` script.

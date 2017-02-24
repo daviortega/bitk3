@@ -3,9 +3,6 @@ import argparse
 from accession2fasta import Accession2fasta
 
 if __name__ == "__main__":
-    if __package__ is None:
-        from os import sys, path
-        sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
     parser = argparse.ArgumentParser(
         prog='accession2fasta',
         usage='%(prog)s accessionList.txt',
