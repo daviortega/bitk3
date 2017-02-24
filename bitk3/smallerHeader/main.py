@@ -27,11 +27,11 @@ if __name__ == "__main__":
 
     fasta = SmallerHeader(fastaFile)
 
-    outputFile = bitk3.insertMethod(fastaFile, 'smallHeader')
+    outputFile = bitk3.insertMethod(fastaFile, 'smallerHeader')
     with open(outputFile, 'w') as f:
         newFasta = str(fasta)
         f.write(newFasta)
 
-    dictionaryFile = bitk3.changeExtension(fastaFile, 'json')
+    dictionaryFile = bitk3.changeExtension(outputFile, 'json')
     with open(dictionaryFile, 'w') as f:
-        json.dump(fasta.newFastaDic, f, indent=2)
+        json.dump(fasta.transdic, f, indent=2)

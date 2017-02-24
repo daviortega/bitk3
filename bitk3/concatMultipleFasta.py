@@ -115,7 +115,7 @@ if __name__ == "__main__":
         fasta files. Trick here is that they must be in the same order'
     )
     parser.add_argument(
-        'fastaFilesHandles',
+        'fastaFileHandles',
         metavar='file1.fa ...',
         type=argparse.FileType('r'),
         nargs='+',
@@ -131,7 +131,11 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    fastaFilesHandles = args.fastaFilesHandles
-    main(fastaFilesHandles, noFiles=args.noFiles)
+    fastaFileHandles = args.fastaFileHandles
+    print("Let's concatenate the following files:\n{}".format(
+        '\n'.join([i.name for i in fastaFileHandles])))
+
+    main(fastaFileHandles, noFiles=args.noFiles)
+    print('All done.')
 else:
     from bitk3 import bitk3
