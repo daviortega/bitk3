@@ -15,6 +15,18 @@ in one of the files is different than the others')
     return True
 
 
+def _sameOrganisms(msaList=[]):
+    msaIndex = range(1, len(msaList))
+    seqDic, seqList = msaList[0]
+    for i, tag in enumerate(seqList):
+        baseOrgID = tag.split(bitk3.BITKTAGSEP)[0]
+        for j in msaIndex:
+            orgID = msaList[j][1][i].split(bitk3.BITKTAGSEP)[0]
+            if orgID != baseOrgID:
+                raise Exception('The alignments seems to be out of order')
+    return True
+
+
 def _buildPartFileRaxml(msaList=[]):
     """It will read the list of CCDs and build a partitioning file for RAxML
     Keyword arguments:
@@ -94,6 +106,7 @@ def main(fastaFilesHandles=[], noFiles=False):
             raise Exception('The {} file in the list is not an MSA.'.format(i))
 
     _withSameNumberOfSequence(dataSets)
+    _sameOrganisms(dataSets)
     output = _parseData(dataSets)
 
     if not noFiles:

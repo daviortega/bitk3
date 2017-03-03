@@ -28,13 +28,13 @@ class TestNotUsingMiST22:
                   AAAAAAAAAAAAAKKKKKKKKKKKKKKKK\n \
                   >Org4|locus4|Acce4|A|C|E\n \
                   AAAAAAAAAAAAAKKKKKKKKKKKKKKKK'
-        fasta2 = '>Org5|locus5|Acce5|B|C|D\n \
+        fasta2 = '>Org1|locus5|Acce5|B|C|D\n \
                   RRRAAAAAAAAAAAKKKKKKKKKKKKKKKA\n \
-                  >Org6|locus6|Acce6|B|C|D\n \
+                  >Org2|locus6|Acce6|B|C|D\n \
                   RRAAAAAAAAAAAAKKKKKKKKKKKKKKKK\n \
-                  >Org7|locus7|Acce7|A|C|D\n \
+                  >Org3|locus7|Acce7|A|C|D\n \
                   RAARAAAAAAAEAAKKKKKKKKKKKKKKKK\n \
-                  >Org8|locus8|Acce8|A|C|E\n \
+                  >Org4|locus8|Acce8|A|C|E\n \
                   RAAARAAAAAAAAAKKKKKKKKKKKKKKKK'
 
         f1 = io.StringIO(fasta1)
@@ -49,19 +49,19 @@ class TestNotUsingMiST22:
         assocTable = [
             [
                 "Org1|locus1|Acce1|B|C|D",
-                "Org5|locus5|Acce5|B|C|D"
+                "Org1|locus5|Acce5|B|C|D"
             ],
             [
                 "Org2|locus2|Acce2|B|C|D",
-                "Org6|locus6|Acce6|B|C|D"
+                "Org2|locus6|Acce6|B|C|D"
             ],
             [
                 "Org3|locus3|Acce3|A|C|D",
-                "Org7|locus7|Acce7|A|C|D"
+                "Org3|locus7|Acce7|A|C|D"
             ],
             [
                 "Org4|locus4|Acce4|A|C|E",
-                "Org8|locus8|Acce8|A|C|E"
+                "Org4|locus8|Acce8|A|C|E"
             ]
         ]
         assert assocTable == output['assocTable']
@@ -70,6 +70,31 @@ class TestNotUsingMiST22:
         assert partFileRaxml == output['partFileRaxml']
         return 0
 
+    def test__sameOrganisms(self):
+        fasta1 = '>Org1|locus1|Acce1|B|C|D\n \
+                  AAAAAAAAAAAAAKKKKKKKKKKKKKKKA\n \
+                  >Org2|locus2|Acce2|B|C|D\n \
+                  AAAAAAAAAAAAAKKKKKKKKKKKKKKKK\n \
+                  >Org3|locus3|Acce3|A|C|D\n \
+                  AAAAAAAAAAAAAKKKKKKKKKKKKKKKK\n \
+                  >Org4|locus4|Acce4|A|C|E\n \
+                  AAAAAAAAAAAAAKKKKKKKKKKKKKKKK'
+        fasta2 = '>Org2|locus5|Acce5|B|C|D\n \
+                  RRRAAAAAAAAAAAKKKKKKKKKKKKKKKA\n \
+                  >Org2|locus6|Acce6|B|C|D\n \
+                  RRAAAAAAAAAAAAKKKKKKKKKKKKKKKK\n \
+                  >Org3|locus7|Acce7|A|C|D\n \
+                  RAARAAAAAAAEAAKKKKKKKKKKKKKKKK\n \
+                  >Org4|locus8|Acce8|A|C|E\n \
+                  RAAARAAAAAAAAAKKKKKKKKKKKKKKKK'
+
+        f1 = io.StringIO(fasta1)
+        f2 = io.StringIO(fasta2)
+        fs = [f1, f2]
+
+        with pytest.raises(Exception) as exinfo:
+            concatMultipleFasta.main(fs)
+        assert 'The alignments seems to be out of order' in str(exinfo.value)
 
     def test__parseData_withDiffNumOfSeqMustFail(self):
         fasta1 = '>Org1|locus1|Acce1|B|C|D\n \
@@ -80,15 +105,15 @@ class TestNotUsingMiST22:
                   AAAAAAAAAAAAAKKKKKKKKKKKKKKKK\n \
                   >Org4|locus4|Acce4|A|C|E\n \
                   AAAAAAAAAAAAAKKKKKKKKKKKKKKKK'
-        fasta2 = '>Org5|locus5|Acce5|B|C|D\n \
+        fasta2 = '>Org1|locus5|Acce5|B|C|D\n \
                   RRRAAAAAAAAAAAKKKKKKKKKKKKKKKA\n \
-                  >Org6|locus6|Acce6|B|C|D\n \
+                  >Org2|locus6|Acce6|B|C|D\n \
                   RRAAAAAAAAAAAAKKKKKKKKKKKKKKKK\n \
-                  >Org7|locus7|Acce7|B|C|D\n \
+                  >Org3|locus7|Acce7|B|C|D\n \
                   RRAAAAAAAAAAAAKKKKKKKKKKKKKKKK\n \
-                  >Org8|locus8|Acce8|A|C|D\n \
+                  >Org4|locus8|Acce8|A|C|D\n \
                   RAARAAAAAAAEAAKKKKKKKKKKKKKKKK\n \
-                  >Org9|locus9|Acce9|A|C|E\n \
+                  >Org5|locus9|Acce9|A|C|E\n \
                   RAAARAAAAAAAAAKKKKKKKKKKKKKKKK'
 
         f1 = io.StringIO(fasta1)
