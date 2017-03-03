@@ -23,11 +23,14 @@ class SmallerHeader:
             i,
             numZ=numZeros
         ) for i in range(len(self.tags))]
-        transdic = {}
+        transdic = []
         newFastaDic = {}
 
         for i, tag in enumerate(self.tags):
-            transdic[newTags[i]] = tag
+            transdic.append({
+                's': newTags[i],
+                'l': tag
+            })
             newFastaDic[newTags[i]] = self.fasta[tag]
 
         return transdic, newFastaDic, newTags

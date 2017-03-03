@@ -22,12 +22,12 @@ result = sH.SmallerHeader(sampleFile)
 class TestSmallHeader:
 
     def test_transdic(self):
-        expected = {
-            'XX0XX': 'Org1|locus1|Acce1|B|C|D',
-            'XX1XX': 'Org2|locus2|Acce2|B|C|D',
-            'XX2XX': 'Org3|locus3|Acce3|A|C|D',
-            'XX3XX': 'Org4|locus4|Acce4|A|C|E'
-        }
+        expected = [
+            {'s': 'XX0XX', 'l': 'Org1|locus1|Acce1|B|C|D'},
+            {'s': 'XX1XX', 'l': 'Org2|locus2|Acce2|B|C|D'},
+            {'s': 'XX2XX', 'l': 'Org3|locus3|Acce3|A|C|D'},
+            {'s': 'XX3XX', 'l': 'Org4|locus4|Acce4|A|C|E'}
+        ]
         assert result.transdic == expected
         return 1
 
