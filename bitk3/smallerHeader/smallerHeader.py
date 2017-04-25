@@ -28,8 +28,8 @@ class SmallerHeader:
 
         for i, tag in enumerate(self.tags):
             transdic.append({
-                's': newTags[i],
-                'l': tag
+                'b': newTags[i],
+                'a': tag
             })
             newFastaDic[newTags[i]] = self.fasta[tag]
 
