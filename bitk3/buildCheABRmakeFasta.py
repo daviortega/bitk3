@@ -240,6 +240,7 @@ def main(
         print('Starting the system')
 
     cheaAC = {}
+    cleanTag2extraInfo = {}
 
     client = bitk3.get_mist22_client()
     mist22 = client.mist22
@@ -251,6 +252,9 @@ def main(
             tag = tag.replace('\n', '')
             accession = bitk3.bitk3tagToAccession(tag)
             cheaAC[accession] = tag
+            cleanTag = bitk3.removeExtraInfoFromBitk3Tag(tag)
+            cleanTag2extraInfo[cleanTag] = bitk3.getExtraInfoFromBitk3Tag(tag)
+            
 
     tic = time.perf_counter()
     if verbose:
@@ -283,7 +287,10 @@ def main(
     if verbose:
         print('\tCompleted in: {:.4} seconds'.format(toc - tic))
         print('adding bitk3tags')
-    cheBRgenes = bitk3.addBitk3tagToMist22GeneInfo(cheBRgenes)
+    cheBRgenes = bitk3.addBitk3tagToMist22GeneInfo(
+        cheBRgenes,
+        extraInfo=cleanTag2extraInfo
+    )
     tic = time.perf_counter()
     if verbose:
         print('\tCompleted in: {:.4} seconds'.format(tic - toc))
@@ -302,12 +309,11 @@ def main(
     if verbose:
         print('\tCompleted in: {:.4} seconds'.format(tic - toc))
 
-    if verbose:
-        print('writing files')
-
     if not noFiles:
         for che in seqInfo['neighbors'].keys():
             filename = che + '.fa'
+            if verbose:
+                print('writing files: {}'.format(filename))
             with open(filename, 'w') as f:
                 f.write(seqInfo['FASTA'][che])
     toc = time.perf_counter()

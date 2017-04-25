@@ -1,9 +1,4 @@
-if __package__ == '':
-    from os import sys, path
-    sys.path.append(path.dirname(path.dirname(__file__)))
-    import bitk3
-else:
-    from bitk3 import bitk3
+from bitk3 import bitk3
 import warnings
 
 

@@ -199,8 +199,8 @@ def cleanListOfAccessions(accessionList=[]):
 
 
 def accessionToMist22GeneInfo(accessionList=[]):
-    """ Read a list of accession and returns a generator to run \
-    over all info from the genes"""
+    """ Read a list of accession and returns a list
+    with info from the genes"""
 
     client = get_mist22_client()
     mist22 = client.mist22
@@ -301,7 +301,7 @@ def getGenomeInfoFromMistIDs(gids=[]):
     return genDic
 
 
-def addBitk3tagToMist22GeneInfo(genes=[]):
+def addBitk3tagToMist22GeneInfo(genes=[], extraInfo={}):
     """ Build bitk3 tag for fasta sequences from list of mist22 genes """
     gids = []
 
@@ -319,6 +319,7 @@ def addBitk3tagToMist22GeneInfo(genes=[]):
     genDic = getGenomeInfoFromMistIDs(gids)
 
     newGenes = []
+
     for gene in oldGenes:
         if gene:
             mistGenomeId = getGenomeIDFromMist22Gene(gene)
@@ -332,6 +333,12 @@ def addBitk3tagToMist22GeneInfo(genes=[]):
 
             bitk3tag = (bitk3genID + BITKTAGSEP + str(lo) +
                         BITKTAGSEP + str(accession))
+
+            if bitk3tag in extraInfo.keys():
+                if len(extraInfo[bitk3tag]) > 0:
+                    bitk3tag += BITKTAGSEP + BITKTAGSEP.join(
+                        extraInfo[bitk3tag]
+                    )
 
             gene['bitk3tag'] = bitk3tag
         newGenes.append(gene)
@@ -398,3 +405,19 @@ def changeExtension(filename, extension):
     filenamenew[-1] = extension
     filenamenew = '.'.join(filenamenew)
     return filenamenew
+
+
+def getExtraInfoFromBitk3Tag(tag, sep=BITKTAGSEP):
+    """Get the fields after the 3 standard field in bitk3 
+    header for the tag and return a list"""
+
+    fields = tag.split(sep)
+    return fields[3:]
+
+
+def removeExtraInfoFromBitk3Tag(tag, sep=BITKTAGSEP):
+    """Get the fields after the 3 standard field in bitk3 
+    header for the tag and return a list"""
+
+    fields = tag.split(sep)
+    return sep.join(fields[:3])

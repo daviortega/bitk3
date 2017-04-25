@@ -18,11 +18,18 @@ in one of the files is different than the others')
 def _sameOrganisms(msaList=[]):
     msaIndex = range(1, len(msaList))
     seqDic, seqList = msaList[0]
-    for i, tag in enumerate(seqList):
-        baseOrgID = tag.split(bitk3.BITKTAGSEP)[0]
+    for i, baseTag in enumerate(seqList):
+        baseOrgID = baseTag.split(bitk3.BITKTAGSEP)[0]
         for j in msaIndex:
-            orgID = msaList[j][1][i].split(bitk3.BITKTAGSEP)[0]
+            tag = msaList[j][1][i]
+            orgID = tag.split(bitk3.BITKTAGSEP)[0]
             if orgID != baseOrgID:
+                print('The sequence {} in alignment number {} is \
+different from alignment {}'.format(
+                    tag,
+                    j,
+                    baseTag
+                ))
                 raise Exception('The alignments seems to be out of order')
     return True
 
@@ -105,8 +112,8 @@ def main(fastaFilesHandles=[], noFiles=False):
         else:
             raise Exception('The {} file in the list is not an MSA.'.format(i))
 
-    _withSameNumberOfSequence(dataSets)
     _sameOrganisms(dataSets)
+    _withSameNumberOfSequence(dataSets)
     output = _parseData(dataSets)
 
     if not noFiles:

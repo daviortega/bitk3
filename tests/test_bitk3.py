@@ -33,7 +33,7 @@ def test_fastaReader_lists():
         'Org4|locus4|Acce4|A|C|E',
         'Org1|locus1|Acce1|B|C|D',
     ]
-    return None
+    return True
 
 
 def test_fastaReader_dictionary_fileWithSpaces():
@@ -49,7 +49,7 @@ def test_fastaReader_dictionary_fileWithSpaces():
         'Org3|locus3|Acce3|A|C|D': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK',
         'Org4|locus4|Acce4|A|C|E': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK'
     }
-    return None
+    return True
 
 
 def test_fastaReader_dictionary():
@@ -62,7 +62,7 @@ def test_fastaReader_dictionary():
         'Org3|locus3|Acce3|A|C|D': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK',
         'Org4|locus4|Acce4|A|C|E': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK'
     }
-    return None
+    return True
 
 
 def test_fastaReader_fileMissingHeaderMarker():
@@ -86,7 +86,7 @@ def test_fasta_class():
         'Org3|locus3|Acce3|A|C|D': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK',
         'Org4|locus4|Acce4|A|C|E': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK'
     }
-    return None
+    return True
 
 
 def test_fasta_class_makeDictionary():
@@ -98,7 +98,7 @@ def test_fasta_class_makeDictionary():
         'Org3|locus3|Acce3|A|C|D': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK',
         'Org4|locus4|Acce4|A|C|E': 'AAAAAAAAAAAAAKKKKKKKKKKKKKKKK'
     }
-    return None
+    return True
 
 
 def test_countFeatureInHeaders_counting():
@@ -110,7 +110,7 @@ def test_countFeatureInHeaders_counting():
         'B': 2,
         'A': 2
     }
-    return None
+    return True
 
 
 def test_countFeatureInHeaders_alternativeTagSeparator():
@@ -122,7 +122,7 @@ def test_countFeatureInHeaders_alternativeTagSeparator():
         'B': 2,
         'A': 2
     }
-    return None
+    return True
 
 
 def test_bitk3tagToAccession():
@@ -140,7 +140,7 @@ def test_bitk3tagToAccession():
         Xted = bitk3.bitk3tagToAccession(tag)
         assert accession[i] == Xted
 
-    return None
+    return True
 
 
 def test_getAseqFromMist22Gene():
@@ -160,7 +160,7 @@ def test_getAseqFromMist22Gene():
         result = bitk3.getAseqFromMist22Gene(gene)
         results.append(result)
     assert expected == results
-    return 1
+    return True
 
 
 def test_getMistIDFromMist22Gene():
@@ -179,7 +179,7 @@ def test_getMistIDFromMist22Gene():
         result = bitk3.getMistIDFromMist22Gene(gene)
         results.append(result)
     assert expected == results
-    return 1
+    return True
 
 
 def test_getAccessionFromMist22Gene():
@@ -199,7 +199,7 @@ def test_getAccessionFromMist22Gene():
         result = bitk3.getAccessionFromMist22Gene(gene)
         results.append(result)
     assert expected == results
-    return 1
+    return True
 
 
 def test_getLocusFromMist22Gene():
@@ -218,7 +218,7 @@ def test_getLocusFromMist22Gene():
         result = bitk3.getLocusFromMist22Gene(gene)
         results.append(result)
     assert expected == results
-    return 1
+    return True
 
 
 def test_getGenomeIDFromMist22Gene():
@@ -232,7 +232,7 @@ def test_getGenomeIDFromMist22Gene():
         result = bitk3.getGenomeIDFromMist22Gene(gene)
         results.append(result)
     assert expected == results
-    return 1
+    return True
 
 
 def test_isValidRefSeqAccession():
@@ -248,7 +248,7 @@ def test_isValidRefSeqAccession():
         expected, inp = fixture
         assert expected == bitk3.isValidRefSeqAccession(inp)
 
-    return 1
+    return True
 
 
 def test_getSeqFromAseq():
@@ -290,7 +290,7 @@ TRSARHTTELKKIPQKIPTLARVTPKPKAMTPKLNKADQDEWEEF'
     for i, aseq in enumerate(aseqs):
         assert aseq2seq[aseq] == seqs[i]
 
-    return 1
+    return True
 
 
 def test_isMSA_False():
@@ -302,7 +302,7 @@ def test_isMSA_False():
     }
 
     assert not bitk3.isMSA(seqInfo)
-    return 1
+    return True
 
 
 def test_isMSA_True():
@@ -314,7 +314,7 @@ def test_isMSA_True():
     }
 
     assert bitk3.isMSA(seqInfo)
-    return 1
+    return True
 
 
 def test_insertMethod():
@@ -327,7 +327,7 @@ def test_insertMethod():
     for fixture in fixtures:
         assert bitk3.insertMethod(fixture[0], fixture[1]) == fixture[2]
 
-        return 1
+    return True
 
 
 def test_changeExtension():
@@ -340,8 +340,71 @@ def test_changeExtension():
     for fixture in fixtures:
         assert bitk3.changeExtension(fixture[0], fixture[1]) == fixture[2]
 
-        return 1
+    return True
 
+
+def test_getExtraInfoFromBitk3Tag():
+    fixtures = [
+        ['Vi_cho_319|VCA1095|NP_233475.1|F7', ['F7']],
+        ['Xa_alb_65|XALc_1369|YP_003375864.1|Random|Info', ['Random', 'Info']]
+    ]
+
+    for fixture in fixtures:
+        assert bitk3.getExtraInfoFromBitk3Tag(fixture[0]) == fixture[1]
+
+    return True
+
+
+def test_getExtraInfoFromBitk3Tag_withCustomSep():
+    fixtures = [
+        [
+            'Vi_cho_319*VCA1095*NP_233475.1*F7',
+            '*',
+            ['F7']
+        ],
+        [
+            'Xa_alb_65#XALc_1369#YP_003375864.1#Random#Info',
+            '#',
+            ['Random', 'Info']
+        ]
+    ]
+
+    for fixture in fixtures:
+        assert bitk3.getExtraInfoFromBitk3Tag(fixture[0], sep=fixture[1]) == fixture[2]
+
+    return True
+
+
+def test_removeExtraInfoFromBitk3Tag():
+    fixtures = [
+        ['Vi_cho_319|VCA1095|NP_233475.1|F7', 'Vi_cho_319|VCA1095|NP_233475.1'],
+        ['Xa_alb_65|XALc_1369|YP_003375864.1|Random|Info', 'Xa_alb_65|XALc_1369|YP_003375864.1']
+    ]
+
+    for fixture in fixtures:
+        assert bitk3.removeExtraInfoFromBitk3Tag(fixture[0]) == fixture[1]
+
+    return True
+
+
+def test_removeExtraInfoFromBitk3Tag_withCustomSep():
+    fixtures = [
+        [
+            'Vi_cho_319*VCA1095*NP_233475.1*F7',
+            '*',
+            'Vi_cho_319*VCA1095*NP_233475.1'
+        ],
+        [
+            'Xa_alb_65#XALc_1369#YP_003375864.1#Random#Info',
+            '#',
+            'Xa_alb_65#XALc_1369#YP_003375864.1'
+        ]
+    ]
+
+    for fixture in fixtures:
+        assert bitk3.removeExtraInfoFromBitk3Tag(fixture[0], sep=fixture[1]) == fixture[2]
+
+    return True
 
 @pytest.mark.skipif(
     "TRAVIS" in os.environ and os.environ["TRAVIS"] == "true",
@@ -368,7 +431,7 @@ class TestUsingMist22:
         for ac in accessions:
             assert ac in listOfRetrievedAC
 
-        return 1
+        return True
 
     def test_addBitk3tagToMist22GeneInfo(self):
         """ Test if it can generate a bitk3 tag from gene info in MiST22 """
@@ -386,7 +449,37 @@ class TestUsingMist22:
         listOfBitk3tag = [gene['bitk3tag'] for gene in genes]
 
         assert set(expected) == set(listOfBitk3tag)
-        return 1
+        return True
+
+    def test_addBitk3tagToMist22GeneInfo_withExtraInfo(self):
+        """ Test if it can generate a bitk3 tag from gene info in MiST22 """
+        sampleFile = dataPath + 'mistGenes.json'
+        expected = [
+            'Al_vin_90|Alvin_2240|YP_003444191.1|Info1',
+            'Al_vin_90|Alvin_2241|None|Info2',
+            'Vi_cho_319|VCA1095|NP_233475.1|Info3.1|Info3.2|Info3.3',
+            'Xa_alb_65|XALc_1369|YP_003375864.1'
+        ]
+
+        extraInfo = {
+            'Al_vin_90|Alvin_2240|YP_003444191.1': ['Info1'],
+            'Al_vin_90|Alvin_2241|None': ['Info2'],
+            'Vi_cho_319|VCA1095|NP_233475.1': [
+                'Info3.1',
+                'Info3.2',
+                'Info3.3'
+                ],
+            'Xa_alb_65|XALc_1369|YP_003375864.1': []
+        }
+
+        with open(sampleFile, 'r') as f:
+            genes = json.load(f)
+        genes = bitk3.addBitk3tagToMist22GeneInfo(genes, extraInfo)
+
+        listOfBitk3tag = [gene['bitk3tag'] for gene in genes]
+
+        assert set(expected) == set(listOfBitk3tag)
+        return True
 
     def test_addBitk3tagToMist22GeneInfo_withoutGene(self):
         """ Test if it can generate a bitk3 tag from gene info in MiST22 """
@@ -401,4 +494,4 @@ class TestUsingMist22:
         for gene in genes:
             assert not gene
 
-        return 1
+        return True
