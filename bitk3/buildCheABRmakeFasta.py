@@ -320,7 +320,7 @@ def main(
     if verbose:
         print('\tCompleted in: {:.4} seconds'.format(toc - tic))
         print('Done. Total time of execution for {} tags = {:.4}'.format(
-            len(accession),
+            len(cheaAC),
             toc - start)
         )
         _printStatsReport(seqInfo)
